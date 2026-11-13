@@ -810,3 +810,57 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
 
 /* Foto redonda (para fotos cuadradas como la de LinkedIn) */
 .about-photo--round { aspect-ratio: 1; max-width: 15rem; border-radius: 50%; }
+
+
+/* ---------------------------------------------------------
+   10. CV (cv.html) y resumen de experiencia en Sobre mí
+   --------------------------------------------------------- */
+/* Resumen corto: sin viñetas, una línea por trabajo */
+.timeline--short .job { padding-block: 1.1rem; }
+.timeline--short .job__role { margin: 0; }
+.timeline--short .job__company { margin: 0; color: var(--muted); font-weight: 400; }
+@media (min-width: 48rem) { .timeline--short .job__date { grid-row: span 2; } }
+
+.cv__head h1 { margin-bottom: 0.5rem; }
+.cv__title { margin-bottom: 0.75rem; max-width: none; }
+.cv__contact { color: var(--muted); font-size: 0.95rem; }
+.cv__section { padding-block: var(--space-m); border-bottom: 1px solid var(--line); }
+.cv__section h2 { font-size: var(--step-2); margin-bottom: 1.25rem; }
+.cv__summary { max-width: 70ch; }
+.cv__grid { display: grid; gap: var(--space-m); }
+@media (min-width: 48rem) { .cv__grid { grid-template-columns: 2fr 1fr; gap: 4rem; } }
+.cv__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
+.cv__list strong { font-weight: 600; }
+
+/* ===== Versión para imprimir / guardar como PDF =====
+   Sin menú, sin colores de fondo, una sola columna y texto real
+   (así los sistemas de selección de personal lo pueden leer). */
+@media print {
+  @page { margin: 12mm 13mm; }
+  :root { --bg: #fff; --surface: #fff; --ink: #111; --muted: #444; --accent: #111; --line: #ccc; }
+  body { font-size: 9.5pt; line-height: 1.4; }
+  body::before, .site-header, .menu, .menu-backdrop, .site-footer, .skip-link, .no-print { display: none !important; }
+  .js .reveal { opacity: 1 !important; transform: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  .page-hero, .cv__section, .section { padding-block: 0 10pt; border-bottom: 0; }
+  .page-hero h1 { font-size: 24pt; margin-bottom: 2pt; }
+  .cv__title { font-size: 12pt; }
+  .cv__section h2 { font-size: 13pt; margin: 8pt 0 6pt; border-bottom: 1px solid #999; padding-bottom: 2pt; }
+  .eyebrow { display: none; }
+  .job { display: block; padding-block: 4pt; break-inside: avoid; border-top: 0; }
+  .job ul { gap: 1pt; margin-top: 2pt; }
+  .cv__list { gap: 4pt; }
+  .cv__summary { max-width: none; }
+  .job__date { display: block; font-size: 9pt; }
+  .job__role { font-size: 11pt; }
+  .job ul { color: #111; max-width: none; }
+  .cv__grid { display: block; }
+  .cv__grid > div + div { margin-top: 8pt; }
+  .skills { display: block; }
+  .skills > div { margin-bottom: 6pt; }
+  .skills h3 { margin-bottom: 2pt; }
+  .tags { display: inline; }
+  .tags li { display: inline; border: 0; padding: 0; color: #111; font-size: 10pt; }
+  .tags li + li::before { content: " · "; }
+  a { color: inherit; text-decoration: none; }
+}
