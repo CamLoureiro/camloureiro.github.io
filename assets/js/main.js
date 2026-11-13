@@ -136,7 +136,8 @@ if (form) {
       });
       if (!res.ok) throw new Error('Error ' + res.status);
       form.reset();
-      showStatus('success');
+      // Si se envió bien, llevamos a la página de agradecimiento
+      window.location.href = 'gracias.html';
     } catch (err) {
       showStatus('error');
     } finally {
