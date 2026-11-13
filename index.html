@@ -1,0 +1,216 @@
+<!doctype html>
+<!-- lang="en" es el valor por defecto; el script de abajo lo ajusta según el navegador -->
+<html lang="en" data-title-en="Camila Loureiro · Portfolio" data-title-es="Camila Loureiro · Portfolio">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Etiqueta solo para la vista previa en Claude; se puede borrar al publicar -->
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <title>Camila Loureiro · Portfolio</title>
+  <meta name="description" content="Camila Loureiro: email marketing, implementation and process work. 10+ years between the technical side and the business side.">
+  <meta name="theme-color" content="#F3ECE1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141A24" media="(prefers-color-scheme: dark)">
+
+  <!-- Elige el idioma ANTES de mostrar la página (evita que parpadee).
+       1º lo que la persona eligió antes · 2º el idioma de su navegador. -->
+  <script>
+    (function () {
+      var lang;
+      try { lang = localStorage.getItem('lang'); } catch (e) {}
+      if (lang !== 'es' && lang !== 'en') {
+        lang = (navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+      }
+      document.documentElement.lang = lang;
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+
+  <!-- Tipografías de Google Fonts (gratuitas) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Instrument+Sans:wght@400..600&display=swap">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main"><span data-lang="en">Skip to content</span><span data-lang="es">Ir al contenido</span></a>
+
+  <!-- ===== HEADER (igual en todas las páginas) ===== -->
+  <header class="site-header">
+    <div class="wrap">
+      <!-- Logo provisorio: lo definimos cuando trabajemos tu marca -->
+      <a class="logo" href="index.html" data-aria-en="Camila Loureiro, home" data-aria-es="Camila Loureiro, inicio">
+        <span class="logo__mark" aria-hidden="true">cl</span>
+        <span>Camila Loureiro</span>
+      </a>
+
+      <div class="header-actions">
+        <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+          <button type="button" data-set-lang="es" aria-pressed="false" lang="es">ES</button>
+          <button type="button" data-set-lang="en" aria-pressed="false" lang="en">EN</button>
+        </div>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+          <span class="menu-btn__label"><span data-lang="en">Menu</span><span data-lang="es">Menú</span></span>
+          <span class="menu-btn__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MENÚ (panel lateral en desktop, pantalla completa en celular) ===== -->
+  <div class="menu-backdrop" aria-hidden="true"></div>
+  <nav class="menu" id="menu" data-aria-en="Main menu" data-aria-es="Menú principal">
+    <ul class="menu__list">
+        <li><a href="index.html" aria-current="page"><small>01</small><span data-lang="en">Home</span><span data-lang="es">Inicio</span></a></li>
+        <li><a href="about.html"><small>02</small><span data-lang="en">About me</span><span data-lang="es">Sobre mí</span></a></li>
+        <li><a href="casos.html"><small>03</small><span data-lang="en">Case studies</span><span data-lang="es">Casos</span></a></li>
+        <li><a href="contacto.html"><small>04</small><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
+    </ul>
+    <div class="menu__footer">
+      <a href="https://www.linkedin.com/in/camilaloureiro/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <span>Buenos Aires, Argentina · <span data-lang="en">Working remotely</span><span data-lang="es">Trabajo remoto</span></span>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="hero__text">
+        <h1 data-lang="en">Thinking about what to build, <em>and for whom.</em></h1>
+        <h1 data-lang="es">Pensar qué construir, <em>y para quién.</em></h1>
+        <div class="hero__meta">
+          <span>Email marketing</span>
+          <span><span data-lang="en">Implementation</span><span data-lang="es">Implementación</span></span>
+          <span><span data-lang="en">Processes</span><span data-lang="es">Procesos</span></span>
+          <span><span data-lang="en">Product</span><span data-lang="es">Producto</span></span>
+        </div>
+      </div>
+      <div class="hero__art">
+        <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+          <!-- Ilustración provisoria (montañas). Se reemplaza por una foto cuando la elijamos. -->
+          <rect width="600" height="600" style="fill:var(--sky)"/>
+          <circle cx="430" cy="170" r="54" style="fill:var(--hill-1);opacity:.55"/>
+          <path d="M0 330 C90 260 160 230 250 280 S420 210 600 260 V600 H0Z" style="fill:var(--hill-1)"/>
+          <path d="M0 400 C120 330 210 350 300 380 S480 320 600 360 V600 H0Z" style="fill:var(--hill-2)"/>
+          <path d="M0 480 C140 440 260 470 360 460 S520 430 600 450 V600 H0Z" style="fill:var(--hill-3)"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===== INTRO ===== -->
+    <section class="section">
+      <div class="wrap intro">
+        <div class="reveal">
+          <span class="eyebrow" data-lang="en">Hello</span><span class="eyebrow" data-lang="es">Hola</span>
+          <h2 data-lang="en">This is what I do</h2><h2 data-lang="es">Esto es lo que hago</h2>
+        </div>
+        <div class="reveal">
+          <div class="prose">
+            <p class="lead" data-lang="en">I'm Camila. For more than 10 years I've built emails, landing pages and automated journeys, working between the technical side and the business side.</p><p class="lead" data-lang="es">Soy Camila. Hace más de 10 años construyo emails, landing pages y journeys automatizados, entre el lado técnico y el de negocio.</p>
+            <p data-lang="en">I enjoy figuring out what to build and for whom, and getting teams aligned to make it happen.</p><p data-lang="es">Disfruto entender qué construir y para quién, y alinear equipos para lograrlo.</p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--solid" href="casos.html"><span data-lang="en">See case studies</span><span data-lang="es">Ver casos</span></a>
+            <a class="btn" href="about.html"><span data-lang="en">About me</span><span data-lang="es">Sobre mí</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICIOS ===== -->
+    <section class="section section--surface" id="services">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow" data-lang="en">Services</span><span class="eyebrow" data-lang="es">Servicios</span>
+          <h2 data-lang="en">How I can help</h2><h2 data-lang="es">En qué puedo ayudarte</h2>
+          <p data-lang="en">From a single email to a whole process.</p><p data-lang="es">Desde un email hasta un proceso completo.</p>
+        </div>
+        <ul class="services">
+        <li class="service reveal">
+          <h3 data-lang="en">Email development &amp; QA</h3><h3 data-lang="es">Desarrollo de emails y QA</h3>
+          <p data-lang="en">Responsive HTML emails, tested in every inbox before they go out.</p><p data-lang="es">Emails HTML responsive, probados en cada bandeja antes de salir.</p>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>Responsive</li><li>Email QA</li></ul>
+        </li>
+        <li class="service reveal">
+          <h3 data-lang="en">Marketing automation &amp; journeys</h3><h3 data-lang="es">Automatización y journeys</h3>
+          <p data-lang="en">Welcome and lifecycle journeys, with segmentation and A/B testing.</p><p data-lang="es">Journeys de bienvenida y ciclo de vida, con segmentación y tests A/B.</p>
+          <ul class="tags"><li>Brevo (Sendinblue)</li><li>emBlue</li><li>Icomm</li><li>SFMC</li></ul>
+        </li>
+        <li class="service reveal">
+          <h3 data-lang="en">Reusable modules for email &amp; landing pages</h3><h3 data-lang="es">Módulos reutilizables para emails y landings</h3>
+          <p data-lang="en">Building blocks based on your brand, so your team creates emails faster and without code.</p><p data-lang="es">Bloques basados en tu marca, para que tu equipo cree emails más rápido y sin código.</p>
+          <ul class="tags"><li>Design systems</li><li>HTML/CSS</li><li>Documentation</li></ul>
+        </li>
+        <li class="service reveal">
+          <h3 data-lang="en">Process documentation</h3><h3 data-lang="es">Documentación de procesos</h3>
+          <p data-lang="en">Process maps, guides and QA checklists, so your team works with less friction.</p><p data-lang="es">Mapas de procesos, guías y checklists de QA, para que tu equipo trabaje con menos fricción.</p>
+          <ul class="tags"><li>Confluence</li><li>Notion</li><li>Google Workspace</li></ul>
+        </li>
+        <li class="service reveal">
+          <h3 data-lang="en">Project &amp; product support</h3><h3 data-lang="es">Soporte de proyectos y producto</h3>
+          <span class="service__status" data-lang="en">Growing area</span><span class="service__status" data-lang="es">Área en crecimiento</span>
+          <p data-lang="en">Clear tickets, user stories and priorities, with Scrum or Kanban.</p><p data-lang="es">Tickets claros, historias de usuario y prioridades, con Scrum o Kanban.</p>
+          <ul class="tags"><li>Jira</li><li>Asana</li><li>Trello</li><li>Scrum</li><li>Kanban</li></ul>
+        </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== HISTORIA (adelanto de About me) ===== -->
+    <section class="section">
+      <div class="wrap story">
+        <div class="reveal">
+          <span class="eyebrow" data-lang="en">My path</span><span class="eyebrow" data-lang="es">Mi recorrido</span>
+          <h2 data-lang="en">From building emails to building products</h2><h2 data-lang="es">De construir emails a construir productos</h2>
+        </div>
+        <div class="reveal prose">
+          <p data-lang="en">From a digital agency to online education, fintech and SaaS: always connecting design, development, marketing and clients.</p><p data-lang="es">De una agencia digital a educación online, fintech y SaaS: siempre conectando diseño, desarrollo, marketing y clientes.</p>
+          <p><a class="link-arrow" href="about.html"><span data-lang="en">Read my story</span><span data-lang="es">Leer mi historia</span> <span aria-hidden="true">→</span></a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACTO (llamado a la acción) ===== -->
+    <section class="section section--accent">
+      <div class="wrap cta reveal">
+        <span class="eyebrow" data-lang="en">Let's talk</span><span class="eyebrow" data-lang="es">Hablemos</span>
+        <h2 data-lang="en">Tell me what you need <em>and let's see how I can help.</em></h2>
+        <h2 data-lang="es">Contame qué necesitás <em>y vemos cómo te ayudo.</em></h2>
+        <a class="btn" href="contacto.html"><span data-lang="en">Get in touch</span><span data-lang="es">Contactame</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER (igual en todas las páginas) ===== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html"><span class="logo__mark" aria-hidden="true">cl</span><span>Camila Loureiro</span></a>
+          <p class="muted" style="margin-top:1rem;max-width:34ch"><span data-lang="en">Email marketing, implementation and process work for teams that want things done well.</span><span data-lang="es">Email marketing, implementación y procesos para equipos que quieren hacer las cosas bien.</span></p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html"><span data-lang="en">Home</span><span data-lang="es">Inicio</span></a></li>
+            <li><a href="about.html"><span data-lang="en">About me</span><span data-lang="es">Sobre mí</span></a></li>
+            <li><a href="casos.html"><span data-lang="en">Case studies</span><span data-lang="es">Casos</span></a></li>
+            <li><a href="contacto.html"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
+          </ul>
+        </nav>
+        <div style="display:grid;gap:0.4rem;align-content:start">
+          <a href="https://www.linkedin.com/in/camilaloureiro/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="contacto.html"><span data-lang="en">Send me a message</span><span data-lang="es">Escribime</span></a>
+          <span class="muted">Buenos Aires, Argentina</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Camila Loureiro · <span data-lang="en">Designed and coded by hand, with help from AI</span><span data-lang="es">Diseñada y programada a mano, con ayuda de IA</span></span>
+        <span class="made-in"><span data-lang="en">Made in Argentina</span><span data-lang="es">Hecho en Argentina</span> <svg class="mate" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.2c-1.7 3.4-1 8 1.6 10.3 1.9 1.6 5.7 1.6 7.6 0 2.6-2.3 3.3-6.9 1.6-10.3"/><path d="M6.6 10.2c1.3 1.1 9.5 1.1 10.8 0-1.3-1.2-9.5-1.2-10.8 0z"/><path d="M13.2 10.6 17.6 2.8"/><path d="M16.6 2.4l2.1 1.1"/><path d="M9 15.5c.4 1.6 1.4 2.8 2.6 3.4"/></svg></span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

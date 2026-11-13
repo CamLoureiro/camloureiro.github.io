@@ -1,0 +1,222 @@
+<!doctype html>
+<!-- lang="en" es el valor por defecto; el script de abajo lo ajusta según el navegador -->
+<html lang="en" data-title-en="About me · Camila Loureiro" data-title-es="Sobre mí · Camila Loureiro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Etiqueta solo para la vista previa en Claude; se puede borrar al publicar -->
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <title>About me · Camila Loureiro</title>
+  <meta name="description" content="Camila Loureiro's story, experience and tools.">
+  <meta name="theme-color" content="#F3ECE1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141A24" media="(prefers-color-scheme: dark)">
+
+  <!-- Elige el idioma ANTES de mostrar la página (evita que parpadee).
+       1º lo que la persona eligió antes · 2º el idioma de su navegador. -->
+  <script>
+    (function () {
+      var lang;
+      try { lang = localStorage.getItem('lang'); } catch (e) {}
+      if (lang !== 'es' && lang !== 'en') {
+        lang = (navigator.language || 'en').toLowerCase().indexOf('es') === 0 ? 'es' : 'en';
+      }
+      document.documentElement.lang = lang;
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+
+  <!-- Tipografías de Google Fonts (gratuitas) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Instrument+Sans:wght@400..600&display=swap">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main"><span data-lang="en">Skip to content</span><span data-lang="es">Ir al contenido</span></a>
+
+  <!-- ===== HEADER (igual en todas las páginas) ===== -->
+  <header class="site-header">
+    <div class="wrap">
+      <!-- Logo provisorio: lo definimos cuando trabajemos tu marca -->
+      <a class="logo" href="index.html" data-aria-en="Camila Loureiro, home" data-aria-es="Camila Loureiro, inicio">
+        <span class="logo__mark" aria-hidden="true">cl</span>
+        <span>Camila Loureiro</span>
+      </a>
+
+      <div class="header-actions">
+        <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+          <button type="button" data-set-lang="es" aria-pressed="false" lang="es">ES</button>
+          <button type="button" data-set-lang="en" aria-pressed="false" lang="en">EN</button>
+        </div>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+          <span class="menu-btn__label"><span data-lang="en">Menu</span><span data-lang="es">Menú</span></span>
+          <span class="menu-btn__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MENÚ (panel lateral en desktop, pantalla completa en celular) ===== -->
+  <div class="menu-backdrop" aria-hidden="true"></div>
+  <nav class="menu" id="menu" data-aria-en="Main menu" data-aria-es="Menú principal">
+    <ul class="menu__list">
+        <li><a href="index.html"><small>01</small><span data-lang="en">Home</span><span data-lang="es">Inicio</span></a></li>
+        <li><a href="about.html" aria-current="page"><small>02</small><span data-lang="en">About me</span><span data-lang="es">Sobre mí</span></a></li>
+        <li><a href="casos.html"><small>03</small><span data-lang="en">Case studies</span><span data-lang="es">Casos</span></a></li>
+        <li><a href="contacto.html"><small>04</small><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
+    </ul>
+    <div class="menu__footer">
+      <a href="https://www.linkedin.com/in/camilaloureiro/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <span>Buenos Aires, Argentina · <span data-lang="en">Working remotely</span><span data-lang="es">Trabajo remoto</span></span>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <section class="wrap page-hero">
+      <span class="eyebrow" data-lang="en">About me</span><span class="eyebrow" data-lang="es">Sobre mí</span>
+      <h1 data-lang="en">Between the technical side <em>and the business side.</em></h1>
+      <h1 data-lang="es">Entre lo técnico <em>y el negocio.</em></h1>
+    </section>
+
+    <!-- ===== HISTORIA ===== -->
+    <section class="section">
+      <div class="wrap about-grid">
+        <!-- FOTO: cuando tengas tu foto, reemplazá este comentario por:
+             <img class="about-photo" src="assets/img/camila.webp" alt="Camila Loureiro" width="800" height="1000"> -->
+
+        <div class="prose reveal">
+          <p class="lead" style="max-width:none" data-lang="en">I started more than 10 years ago as a web and email developer at a digital agency. There I learned to build for every device, deliver on time and care about details.</p><p class="lead" style="max-width:none" data-lang="es">Empecé hace más de 10 años como desarrolladora web y de emails en una agencia digital. Ahí aprendí a construir para cualquier dispositivo, entregar a tiempo y cuidar los detalles.</p>
+          <p data-lang="en">Then came online education, fintech and SaaS: I managed email projects, designed automated journeys, built reusable modules and documented processes. Always in the middle, between design, development, marketing and clients.</p><p data-lang="es">Después vinieron la educación online, fintech y SaaS: gestioné proyectos de email, diseñé journeys automatizados, construí módulos reutilizables y documenté procesos. Siempre en el medio, entre diseño, desarrollo, marketing y clientes.</p>
+          <p data-lang="en">What I enjoy most is deciding what to build and for whom. That's why I'm growing into project and product work.</p><p data-lang="es">Lo que más disfruto es definir qué construir y para quién. Por eso estoy creciendo hacia proyectos y producto.</p>
+          <p data-lang="en">Organized, curious and always learning.</p><p data-lang="es">Organizada, curiosa y siempre aprendiendo.</p>
+          <p data-lang="en">Outside work, I'm learning to weld and to make my own clothes.</p><p data-lang="es">Fuera del trabajo, estoy aprendiendo a soldar y a hacer mi propia ropa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CÓMO TRABAJO ===== -->
+    <section class="section section--surface">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 data-lang="en">How I work</h2><h2 data-lang="es">Cómo trabajo</h2>
+        </div>
+        <ul class="principles">
+          <li class="reveal">
+            <h3 data-lang="en">Details matter</h3><h3 data-lang="es">Los detalles importan</h3>
+            <p data-lang="en">I test everything before it goes out. A broken button in one inbox is a broken experience.</p><p data-lang="es">Pruebo todo antes de que salga. Un botón roto en una bandeja es una experiencia rota.</p>
+          </li>
+          <li class="reveal">
+            <h3 data-lang="en">I translate between teams</h3><h3 data-lang="es">Traduzco entre equipos</h3>
+            <p data-lang="en">I speak both marketing and development, and help both sides reach the same plan.</p><p data-lang="es">Hablo el idioma de marketing y el de desarrollo, y ayudo a que ambos lleguen al mismo plan.</p>
+          </li>
+          <li class="reveal">
+            <h3 data-lang="en">I leave things documented</h3><h3 data-lang="es">Dejo todo documentado</h3>
+            <p data-lang="en">Processes, guides and checklists, so the work doesn't depend on one person.</p><p data-lang="es">Procesos, guías y checklists, para que el trabajo no dependa de una sola persona.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCIA (tu CV) ===== -->
+    <section class="section" id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow" data-lang="en">Experience</span><span class="eyebrow" data-lang="es">Experiencia</span>
+          <h2 data-lang="en">Where I've worked</h2><h2 data-lang="es">Dónde trabajé</h2>
+        </div>
+        <!-- TODO: completar fechas y logros. Lo ideal son 2-3 puntos con resultados concretos por empresa. -->
+        <ol class="timeline">
+          <li class="job reveal">
+            <span class="job__date"><span data-lang="en">Sep 2022 – Aug 2026</span><span data-lang="es">Sep 2022 – Ago 2026</span></span>
+            <h3 class="job__role">Senior Implementation Developer</h3>
+            <p class="job__company">Stensul <span>· SaaS</span></p>
+            <ul><li data-lang="en">Built reusable email and landing page modules from each client's brand guidelines.</li><li data-lang="es">Desarrollé módulos reutilizables para emails y landings según la guía de marca de cada cliente.</li><li data-lang="en">Led technical audits for enterprise clients: naming, accessibility and code quality.</li><li data-lang="es">Lideré auditorías técnicas para clientes enterprise: nomenclatura, accesibilidad y calidad de código.</li><li data-lang="en">Fixed rendering issues in Outlook and dark mode; QA with Email on Acid.</li><li data-lang="es">Resolví problemas de visualización en Outlook y modo oscuro; QA con Email on Acid.</li><li data-lang="en">Worked closely with CSMs, support and product teams.</li><li data-lang="es">Trabajo cercano con CSMs, soporte y producto.</li></ul>
+          </li>
+          <li class="job reveal">
+            <span class="job__date">Sep 2021 – May 2022</span>
+            <h3 class="job__role">Email Developer / Marketing Analyst</h3>
+            <p class="job__company">Wenance <span>· Fintech</span></p>
+            <ul><li data-lang="en">Designed the journey flow for the migration to Salesforce Marketing Cloud, later implemented by the BI team.</li><li data-lang="es">Diseñé el flujo de journeys para la migración a Salesforce Marketing Cloud, que luego implementó el equipo de BI.</li><li data-lang="en">Documented the flow and trained the email team to edit emails directly in Automation, saving manual work.</li><li data-lang="es">Documenté el flujo y capacité al equipo de email para editar los mails desde Automation, sin trabajo manual.</li><li data-lang="en">Migrated the emails into modules, so designing and building new ones was faster.</li><li data-lang="es">Migré los emails a módulos, para que diseñar y armar mails nuevos fuera más rápido.</li><li data-lang="en">Retention campaigns by email and SMS, coordinating with BI teams in 5 countries.</li><li data-lang="es">Campañas de retención por email y SMS, coordinando con equipos de BI de 5 países.</li></ul>
+          </li>
+          <li class="job reveal">
+            <span class="job__date">Nov 2017 – Sep 2021</span>
+            <h3 class="job__role">Email Marketing Project Manager</h3>
+            <p class="job__company">Inversor Global <span>· <span data-lang="en">Online education</span><span data-lang="es">Educación online</span></span></p>
+            <ul><li data-lang="en">Started in web (landing pages and QA) and moved to email marketing in 2018.</li><li data-lang="es">Entré en web (landing pages y QA) y en 2018 pasé a email marketing.</li><li data-lang="en">Designed welcome and course-progress journeys for students.</li><li data-lang="es">Diseñé journeys de bienvenida y de progreso de cursos para estudiantes.</li><li data-lang="en">Segmentation from newsletter audiences.</li><li data-lang="es">Segmentación a partir de las audiencias de newsletters.</li><li data-lang="en">A/B tests on send time, subject lines and content.</li><li data-lang="es">Tests A/B de horario, asunto y contenido.</li></ul>
+          </li>
+          <li class="job reveal">
+            <span class="job__date">Mar 2013 – Nov 2017</span>
+            <h3 class="job__role" data-lang="en">Web Developer &amp; Email Developer</h3><h3 class="job__role" data-lang="es">Web Developer y Email Developer</h3>
+            <p class="job__company">Wunderman <span>· <span data-lang="en">Digital agency</span><span data-lang="es">Agencia digital</span></span></p>
+            <ul><li data-lang="en">Built responsive emails and websites for multiple clients in a fast-paced agency.</li><li data-lang="es">Desarrollé emails y sitios responsive para distintos clientes en una agencia de ritmo rápido.</li></ul>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== FORMACIÓN Y HERRAMIENTAS ===== -->
+    <section class="section section--surface">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <h2 data-lang="en">Education &amp; tools</h2><h2 data-lang="es">Formación y herramientas</h2>
+        </div>
+        <div class="skills reveal">
+          <div>
+            <h3 data-lang="en">Education</h3><h3 data-lang="es">Formación</h3>
+            <p data-lang="en">Project Management Methodologies diploma (Waterfall, PRINCE2, Scrum, Kanban, Lean, Six Sigma). Edutin Academy, 2026 · 120 h</p><p data-lang="es">Diploma en metodologías de project management (Waterfall, PRINCE2, Scrum, Kanban, Lean, Six Sigma). Edutin Academy, 2026 · 120 h</p>
+          </div>
+          <div>
+            <h3 data-lang="en">Email &amp; automation</h3><h3 data-lang="es">Email y automatización</h3>
+            <ul class="tags"><li>Brevo (Sendinblue)</li><li>emBlue</li><li>Icomm</li><li>Message Central</li><li>Blueshift</li><li>ExactTarget</li><li>SFMC</li><li>Email on Acid</li><li>HTML</li><li>CSS</li></ul>
+          </div>
+          <div>
+            <h3 data-lang="en">Project &amp; documentation</h3><h3 data-lang="es">Proyectos y documentación</h3>
+            <ul class="tags"><li>Jira</li><li>Confluence</li><li>Asana</li><li>Notion</li><li>Trello</li><li>Miro</li><li>Figma</li><li>Google Workspace</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--accent">
+      <div class="wrap cta reveal">
+        <h2 data-lang="en">If you made it this far, <em>let's talk.</em></h2>
+        <h2 data-lang="es">Si llegaste hasta acá, <em>charlemos.</em></h2>
+        <a class="btn" href="contacto.html"><span data-lang="en">Get in touch</span><span data-lang="es">Contactame</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER (igual en todas las páginas) ===== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html"><span class="logo__mark" aria-hidden="true">cl</span><span>Camila Loureiro</span></a>
+          <p class="muted" style="margin-top:1rem;max-width:34ch"><span data-lang="en">Email marketing, implementation and process work for teams that want things done well.</span><span data-lang="es">Email marketing, implementación y procesos para equipos que quieren hacer las cosas bien.</span></p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html"><span data-lang="en">Home</span><span data-lang="es">Inicio</span></a></li>
+            <li><a href="about.html"><span data-lang="en">About me</span><span data-lang="es">Sobre mí</span></a></li>
+            <li><a href="casos.html"><span data-lang="en">Case studies</span><span data-lang="es">Casos</span></a></li>
+            <li><a href="contacto.html"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
+          </ul>
+        </nav>
+        <div style="display:grid;gap:0.4rem;align-content:start">
+          <a href="https://www.linkedin.com/in/camilaloureiro/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="contacto.html"><span data-lang="en">Send me a message</span><span data-lang="es">Escribime</span></a>
+          <span class="muted">Buenos Aires, Argentina</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> Camila Loureiro · <span data-lang="en">Designed and coded by hand, with help from AI</span><span data-lang="es">Diseñada y programada a mano, con ayuda de IA</span></span>
+        <span class="made-in"><span data-lang="en">Made in Argentina</span><span data-lang="es">Hecho en Argentina</span> <svg class="mate" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.2c-1.7 3.4-1 8 1.6 10.3 1.9 1.6 5.7 1.6 7.6 0 2.6-2.3 3.3-6.9 1.6-10.3"/><path d="M6.6 10.2c1.3 1.1 9.5 1.1 10.8 0-1.3-1.2-9.5-1.2-10.8 0z"/><path d="M13.2 10.6 17.6 2.8"/><path d="M16.6 2.4l2.1 1.1"/><path d="M9 15.5c.4 1.6 1.4 2.8 2.6 3.4"/></svg></span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

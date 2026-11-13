@@ -1,0 +1,807 @@
+/* =========================================================
+   PORTFOLIO · CAMILA LOUREIRO
+   Hoja de estilos principal (una sola para todo el sitio).
+
+   Índice:
+   1. Tokens (colores, tipografías, espacios)  ← acá cambiás la identidad
+   2. Base y reset
+   3. Utilidades (contenedor, botones, etiquetas)
+   4. Header + menú lateral
+   5. Secciones del index
+   6. Páginas internas (About, Casos, Contacto)
+   7. Footer
+   8. Animaciones
+
+   Enfoque "mobile first": los estilos base son para celular.
+   Las reglas @media (min-width: …) agregan cambios para pantallas
+   más grandes. 48rem ≈ 768px (tablet) · 64rem ≈ 1024px (desktop).
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. TOKENS
+   Layout: bandas de color de ancho completo, texto alineado a la
+   izquierda, títulos serif grandes como protagonistas.
+   --------------------------------------------------------- */
+:root {
+  /* Colores · modo claro */
+  --bg: #F3ECE1;        /* fondo general: papel cálido */
+  --surface: #E4D5BE;   /* bandas de color: arena */
+  --ink: #221A13;       /* texto principal: marrón espresso */
+  --muted: #6A5B47;     /* texto secundario */
+  --accent: #2C3B54;    /* acento: azul tinta (viene de tu referencia) */
+  --on-accent: #F3ECE1; /* texto sobre el acento */
+  --line: color-mix(in srgb, var(--ink) 16%, transparent);
+
+  /* Banda de contacto: en claro, bloque azul; en oscuro, banda con título en acento */
+  --band-bg: var(--accent);
+  --band-ink: var(--on-accent);
+  --band-em: var(--on-accent);
+
+  /* Colores de la ilustración del hero (montañas) */
+  --hill-1: #C9B496;
+  --hill-2: #A8916F;
+  --hill-3: #7C6A4F;
+  --sky: #E9DFCF;
+
+  /* Tipografías (Google Fonts, gratuitas) */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Escala tipográfica fluida: clamp(mínimo, ideal, máximo) */
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.3rem + 1.4vw, 2.4rem);
+  --step-3: clamp(2.2rem, 1.6rem + 3vw, 4rem);
+  --step-4: clamp(2.8rem, 1.8rem + 5.5vw, 6.5rem);
+
+  /* Espacios */
+  --space-s: 1rem;
+  --space-m: 2rem;
+  --space-l: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+  --gutter: max(16px, 5vw);
+  --max: 72rem;          /* ancho máximo del contenido */
+  --radius: 4px;
+  --header-h: 4.25rem;
+
+  color-scheme: light;
+}
+
+/* Modo oscuro automático (según la configuración del dispositivo).
+   Paleta "Día y noche": de noche el fondo es azul tinta y el acento, arena. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141A24;        /* azul noche */
+    --surface: #1E2735;
+    --ink: #EFE6D8;
+    --muted: #A3AAB6;
+    --accent: #D4B483;    /* arena */
+    --on-accent: #141A24;
+    --band-bg: var(--surface);
+    --band-ink: var(--ink);
+    --band-em: var(--accent);
+    --hill-1: #3A4558;
+    --hill-2: #2C3646;
+    --hill-3: #222A38;
+    --sky: #1A2230;
+    color-scheme: dark;
+  }
+}
+/* Igual que arriba, por si alguna vez agregás un botón para elegir tema */
+:root[data-theme="dark"] {
+  --bg: #141A24;    /* azul noche */
+  --surface: #1E2735;
+  --ink: #EFE6D8;
+  --muted: #A3AAB6;
+  --accent: #D4B483;  /* arena */
+  --on-accent: #141A24;
+  --band-bg: var(--surface);
+  --band-ink: var(--ink);
+  --band-em: var(--accent);
+  --hill-1: #3A4558;
+  --hill-2: #2C3646;
+  --hill-3: #222A38;
+  --sky: #1A2230;
+  color-scheme: dark;
+}
+
+
+/* ---------------------------------------------------------
+   2. BASE
+   --------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1rem); /* para que los #anclas no queden tapadas */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Barra superior en iPhone (zona del notch) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 60;
+}
+
+/* Cuando el menú está abierto, se bloquea el scroll del fondo */
+body.menu-open { overflow: hidden; }
+
+img, svg { display: block; max-width: 100%; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0;
+}
+h3 { font-size: var(--step-1); line-height: 1.2; }
+
+p { margin: 0; text-wrap: pretty; }
+
+a { color: inherit; text-underline-offset: 0.2em; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ===== Sistema bilingüe =====
+   Cada texto existe dos veces: data-lang="en" y data-lang="es".
+   Se muestra solo el del idioma activo (atributo lang del <html>). */
+html[lang="es"] [data-lang="en"],
+html[lang="en"] [data-lang="es"] { display: none !important; }
+
+
+/* ---------------------------------------------------------
+   3. UTILIDADES
+   --------------------------------------------------------- */
+
+/* Contenedor: centra el contenido y deja márgenes laterales */
+.wrap {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+
+.section { padding-block: var(--space-l); }
+.section--surface { background: var(--surface); }
+.section--accent { background: var(--band-bg); color: var(--band-ink); }
+.section--accent h2 em { color: var(--band-em); }
+
+/* Texto chico en mayúsculas arriba de los títulos */
+.eyebrow {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--space-s);
+}
+.section--accent .eyebrow { color: color-mix(in srgb, var(--band-ink) 70%, transparent); }
+
+.lead {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  max-width: 38ch;
+}
+
+.prose { display: grid; gap: 1.1em; max-width: 62ch; }
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.85em 1.4em;
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  font: 600 0.9rem/1 var(--font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  transition: background-color 0.2s, color 0.2s;
+}
+.btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn--solid { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.btn--solid:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.section--accent .btn:hover { background: var(--band-ink); color: var(--band-bg); border-color: var(--band-ink); }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: var(--space-m); }
+
+/* Link con flecha */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.15em;
+}
+.link-arrow span[aria-hidden] { transition: transform 0.2s; }
+.link-arrow:hover span[aria-hidden] { transform: translateX(4px); }
+
+/* Etiquetas (herramientas, skills) */
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0; margin: 0; list-style: none; }
+.tags li {
+  font-size: 0.8rem;
+  padding: 0.3em 0.75em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+/* Bloque reservado para imágenes/contenido que todavía no existe */
+.placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 12rem;
+  padding: var(--space-m);
+  border: 1px dashed color-mix(in srgb, var(--ink) 30%, transparent);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Link para saltar al contenido (accesibilidad con teclado) */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.skip-link:focus { top: calc(1rem + env(safe-area-inset-top, 0px)); }
+
+
+/* ---------------------------------------------------------
+   4. HEADER + MENÚ
+   --------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: var(--header-h);
+}
+
+/* Logo provisorio: monograma + nombre */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+.logo__mark {
+  display: grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.header-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+/* Selector de idioma */
+.lang-toggle {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px;
+}
+.lang-toggle button {
+  font: 600 0.75rem/1 var(--font-body);
+  letter-spacing: 0.08em;
+  padding: 0.5em 0.7em;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.lang-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+/* Botón hamburguesa */
+.menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.4rem 0.6rem 0.8rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: 600 0.8rem/1 var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+/* En celular el texto "Menú" no se ve, pero los lectores de pantalla sí lo leen */
+.menu-btn__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.menu-btn__icon { display: grid; gap: 5px; width: 22px; }
+.menu-btn__icon span {
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+/* La hamburguesa se convierte en X cuando el menú está abierto */
+.menu-btn[aria-expanded="true"] .menu-btn__icon span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] .menu-btn__icon span:nth-child(2) { opacity: 0; }
+.menu-btn[aria-expanded="true"] .menu-btn__icon span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Fondo oscuro detrás del panel (solo se nota en desktop) */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: color-mix(in srgb, #000 40%, transparent);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s, visibility 0.35s;
+}
+
+/* Panel del menú: en celular ocupa toda la pantalla */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 1.5rem) max(var(--gutter), env(safe-area-inset-right, 0px)) calc(2rem + env(safe-area-inset-bottom, 0px)) max(var(--gutter), env(safe-area-inset-left, 0px));
+  background: var(--surface);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.45s cubic-bezier(0.7, 0, 0.2, 1), visibility 0.45s;
+  overflow-y: auto;
+}
+.menu-open .menu { transform: none; visibility: visible; }
+.menu-open .menu-backdrop { opacity: 1; visibility: visible; }
+
+.menu__list { list-style: none; margin: 0; padding: 0; display: grid; }
+.menu__list a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: 1.1;
+  text-decoration: none;
+  transition: padding 0.25s;
+}
+.menu__list a:hover { padding-left: 0.5rem; }
+.menu__list a[aria-current="page"] { font-style: italic; }
+.menu__list small {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.menu__footer {
+  margin-top: auto;
+  padding-top: var(--space-m);
+  display: grid;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (min-width: 48rem) {
+  .menu-btn__label { position: static; width: auto; height: auto; overflow: visible; clip-path: none; }
+
+  /* En desktop el menú es un panel lateral a la derecha */
+  .menu {
+    left: auto;
+    width: min(30rem, 90vw);
+    padding-left: 3rem;
+    padding-right: max(3rem, env(safe-area-inset-right, 0px));
+    box-shadow: -20px 0 60px color-mix(in srgb, #000 15%, transparent);
+  }
+  .menu__list a { font-size: var(--step-2); }
+}
+
+
+/* ---------------------------------------------------------
+   5. INDEX
+   --------------------------------------------------------- */
+
+/* Hero: en celular, título arriba e ilustración abajo.
+   En desktop, dos columnas (ilustración | título), como tu referencia. */
+.hero { display: grid; background: var(--surface); }
+.hero__text {
+  display: grid;
+  align-content: center;
+  gap: var(--space-m);
+  padding-block: var(--space-l);
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+.hero h1 { font-size: var(--step-4); font-weight: 350; line-height: 0.98; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero__art { min-height: 16rem; background: var(--sky); overflow: hidden; }
+.hero__art svg { width: 100%; height: 100%; object-fit: cover; }
+
+@media (min-width: 64rem) {
+  .hero { grid-template-columns: 1fr 1.1fr; min-height: min(44rem, calc(100svh - var(--header-h))); }
+  .hero__art { order: -1; min-height: 100%; }
+  .hero__text { padding-left: 4rem; }
+}
+
+/* Intro "Hola, esto es lo que hago" */
+.intro { display: grid; gap: var(--space-m); }
+.intro h2 { font-size: var(--step-3); }
+@media (min-width: 64rem) {
+  .intro { grid-template-columns: 1fr 1fr; align-items: start; gap: 4rem; }
+}
+
+/* Lista de servicios */
+.section-head { display: grid; gap: 0.75rem; margin-bottom: var(--space-m); }
+.section-head h2 { font-size: var(--step-3); }
+.section-head p { color: var(--muted); max-width: 52ch; }
+
+.services { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.service {
+  display: grid;
+  gap: 0.75rem;
+  padding-block: 1.75rem;
+  border-bottom: 1px solid var(--line);
+}
+.service h3 { font-size: var(--step-2); }
+.service p { color: var(--muted); max-width: 52ch; }
+.service__status {
+  justify-self: start;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+@media (min-width: 48rem) {
+  .service { grid-template-columns: 1fr 1fr; column-gap: 3rem; align-items: start; }
+  .service h3 { grid-row: span 3; }
+}
+
+/* Bloque "De construir emails a construir productos" */
+.story { display: grid; gap: var(--space-m); }
+.story h2 { font-size: var(--step-3); }
+@media (min-width: 64rem) {
+  .story { grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: end; }
+}
+
+/* Banda final de contacto */
+.cta { display: grid; gap: var(--space-m); justify-items: start; }
+.cta h2 { font-size: var(--step-3); max-width: 16ch; }
+.cta h2 em { font-style: italic; }
+
+
+/* ---------------------------------------------------------
+   6. PÁGINAS INTERNAS
+   --------------------------------------------------------- */
+.page-hero {
+  padding-block: var(--space-l) var(--space-m);
+  border-bottom: 1px solid var(--line);
+}
+.page-hero h1 { font-size: var(--step-4); font-weight: 350; margin-bottom: var(--space-m); }
+.page-hero h1 em { font-style: italic; color: var(--accent); }
+
+/* --- About --- */
+.about-grid { display: grid; gap: var(--space-m); }
+.about-photo { aspect-ratio: 4 / 5; min-height: 0; max-width: 22rem; width: 100%; height: auto; object-fit: cover; border-radius: var(--radius); }
+@media (min-width: 64rem) {
+  /* Dos columnas solo cuando hay foto */
+  .about-grid:has(.about-photo) { grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+  .about-photo { position: sticky; top: calc(var(--header-h) + 2rem); }
+}
+
+.principles { display: grid; gap: var(--space-m); padding: 0; margin: 0; list-style: none; }
+.principles li { display: grid; gap: 0.5rem; padding-top: 1.25rem; border-top: 1px solid var(--ink); }
+.principles p { color: var(--muted); }
+@media (min-width: 48rem) { .principles { grid-template-columns: repeat(3, 1fr); } }
+
+/* Línea de tiempo de experiencia (tu CV) */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.job {
+  display: grid;
+  gap: 0.5rem;
+  padding-block: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+.job__date {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.job__role { font-size: var(--step-1); }
+.job__company { font-weight: 600; }
+.job__company span { font-weight: 400; color: var(--muted); }
+.job ul { margin: 0.5rem 0 0; padding-left: 1.1rem; color: var(--muted); display: grid; gap: 0.3rem; max-width: 60ch; }
+@media (min-width: 48rem) {
+  .job { grid-template-columns: 12rem 1fr; column-gap: 2rem; }
+  .job__date { grid-row: span 4; padding-top: 0.3rem; }
+}
+
+.skills { display: grid; gap: var(--space-m); }
+.skills h3 { font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+@media (min-width: 48rem) { .skills { grid-template-columns: repeat(3, 1fr); } }
+
+/* --- Casos --- */
+.case-index { display: grid; gap: 1rem; padding: 0; margin: 0; list-style: none; }
+.case-index a {
+  display: grid;
+  gap: 0.4rem;
+  height: 100%;
+  padding: 1.5rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: transform 0.25s;
+}
+.case-index a:hover { transform: translateY(-3px); }
+.case-index strong { font-family: var(--font-display); font-weight: 400; font-size: var(--step-1); line-height: 1.2; }
+.case-index a > span { color: var(--muted); font-size: 0.9rem; }
+@media (min-width: 48rem) { .case-index { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 64rem) { .case-index { grid-template-columns: repeat(4, 1fr); } }
+
+.case { display: grid; gap: var(--space-m); }
+.case + .case { margin-top: var(--space-l); padding-top: var(--space-l); border-top: 1px solid var(--line); }
+.case__head h2 { font-size: var(--step-3); }
+.case__meta {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.25rem 0;
+  border-block: 1px solid var(--line);
+}
+.case__meta dt { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.case__meta dd { margin: 0.2rem 0 0; }
+@media (min-width: 48rem) { .case__meta { grid-template-columns: repeat(3, 1fr); } }
+
+.case__body { display: grid; gap: var(--space-m); }
+.case__block { display: grid; gap: 0.6rem; max-width: 62ch; }
+.case__block h3 { font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.case__block ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; }
+
+/* Lista de resultados con el número destacado */
+.case__block .results { list-style: none; padding: 0; gap: 0.9rem; }
+.results li { display: grid; grid-template-columns: 6rem 1fr; gap: 0.75rem; align-items: baseline; }
+.results strong {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 64rem) { .case__body { grid-template-columns: 1fr 1fr; column-gap: 4rem; } }
+
+.badge {
+  justify-self: start;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35em 0.8em;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Diagrama del journey: pasos conectados.
+   En celular va en vertical; en desktop, en horizontal con scroll si hace falta. */
+.flow-wrap { overflow-x: auto; padding-bottom: 0.5rem; }
+.flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  counter-reset: step;
+}
+.flow li {
+  position: relative;
+  display: grid;
+  gap: 0.2rem;
+  padding: 0 0 1.5rem 2.5rem;
+  counter-increment: step;
+}
+/* círculo con número */
+.flow li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+/* línea que une los pasos */
+.flow li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(0.875rem - 1px);
+  top: 1.75rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+.flow strong { font-weight: 600; }
+.flow span { font-size: 0.85rem; color: var(--muted); }
+.flow li.flow__split::before { background: var(--ink); color: var(--bg); }
+
+@media (min-width: 64rem) {
+  .flow { grid-template-columns: repeat(7, minmax(8.5rem, 1fr)); min-width: 62rem; }
+  .flow li { padding: 2.5rem 1rem 0 0; }
+  .flow li:not(:last-child)::after { left: 1.75rem; right: 0; top: calc(0.875rem - 1px); bottom: auto; width: auto; height: 2px; }
+}
+
+/* --- Contacto --- */
+.contact-grid { display: grid; gap: var(--space-l); }
+@media (min-width: 64rem) { .contact-grid { grid-template-columns: 1fr 1.4fr; gap: 5rem; } }
+
+.contact-links { display: grid; gap: 1.25rem; align-content: start; }
+.contact-links a { font-family: var(--font-display); font-size: var(--step-2); text-decoration: none; }
+.contact-links a:hover { font-style: italic; }
+
+.form { display: grid; gap: 1.5rem; }
+.field { display: grid; gap: 0.4rem; }
+.field > label, .field legend {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0;
+}
+.field input, .field textarea {
+  width: 100%;
+  padding: 0.85rem 0;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 35%, transparent);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  border-radius: 0;
+}
+.field textarea { min-height: 8rem; resize: vertical; }
+.field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--accent); box-shadow: 0 1px 0 var(--accent); }
+.field input:focus-visible, .field textarea:focus-visible { outline: none; }
+fieldset.field { border: 0; margin: 0; padding: 0; }
+.field legend { margin-bottom: 0.6rem; }
+
+/* "Chips" para elegir el tipo de servicio */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip { position: relative; }
+.chip input { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.chip > span {
+  display: inline-block;
+  padding: 0.55em 1em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+.chip input:checked + span { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.chip input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Campo trampa anti-spam: invisible para personas */
+.honeypot { position: absolute; left: -9999px; }
+
+.form-status { padding: 1rem; border-radius: var(--radius); background: var(--surface); }
+
+
+/* ---------------------------------------------------------
+   7. FOOTER
+   --------------------------------------------------------- */
+.site-footer { border-top: 1px solid var(--line); padding-block: var(--space-l) calc(2rem + env(safe-area-inset-bottom, 0px)); }
+.footer-grid { display: grid; gap: var(--space-m); }
+.footer-grid nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+.footer-grid a { text-decoration: none; }
+.footer-grid a:hover { text-decoration: underline; }
+.footer-grid .muted { color: var(--muted); }
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: var(--space-l);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+@media (min-width: 48rem) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+
+
+/* ---------------------------------------------------------
+   8. ANIMACIONES
+   Los elementos con .reveal aparecen suavemente al hacer scroll.
+   Solo se activan si JavaScript funciona (clase .js en <html>)
+   y si la persona no pidió "reducir movimiento" en su sistema.
+   --------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .js .reveal.is-visible { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+
+/* ---------------------------------------------------------
+   9. DETALLES: mate, 404 y foto redonda
+   --------------------------------------------------------- */
+.made-in { display: inline-flex; align-items: center; gap: 0.4rem; }
+.mate { flex: none; color: var(--accent); }
+
+.notfound { display: grid; justify-items: start; gap: 0.5rem; padding-block: var(--space-l); border-bottom: 0; }
+.notfound__icon .mate { width: 4.5rem; height: 4.5rem; stroke-width: 1.1; margin-bottom: 1rem; }
+
+/* Foto redonda (para fotos cuadradas como la de LinkedIn) */
+.about-photo--round { aspect-ratio: 1; max-width: 15rem; border-radius: 50%; }
