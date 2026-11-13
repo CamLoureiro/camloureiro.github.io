@@ -4,7 +4,8 @@
    2. Menú hamburguesa
    3. Animaciones al hacer scroll
    4. Formulario de contacto
-   5. Año automático en el footer
+   5. Botón para guardar el CV en PDF
+   6. Año automático en el footer
    ========================================================= */
 
 const root = document.documentElement;
@@ -147,7 +148,14 @@ if (form) {
 }
 
 
-/* ---------- 5. AÑO DEL FOOTER ---------- */
+/* ---------- 5. BOTÓN "GUARDAR COMO PDF" (página de CV) ----------
+   Abre el diálogo de impresión del navegador; ahí se elige "Guardar como PDF". */
+document.querySelectorAll('[data-print]').forEach((btn) => {
+  btn.addEventListener('click', () => window.print());
+});
+
+
+/* ---------- 6. AÑO DEL FOOTER ---------- */
 document.querySelectorAll('[data-year]').forEach((el) => {
   el.textContent = new Date().getFullYear();
 });
