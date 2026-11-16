@@ -31,6 +31,11 @@
   --muted: #6A5B47;     /* texto secundario */
   --accent: #2C3B54;    /* acento: azul tinta (viene de tu referencia) */
   --on-accent: #F3ECE1; /* texto sobre el acento */
+  --brick: #963D2C;      /* tercer color: ladrillo, para detalles (etiquetas, números, flechas) */
+  --brick-fill: #963D2C; /* relleno ladrillo para el hover de los botones */
+  --on-brick: #F3ECE1;   /* texto sobre el relleno ladrillo */
+  --btn-solid-bg: var(--accent);  /* botón principal: azul tinta */
+  --btn-solid-ink: var(--on-accent);
   --line: color-mix(in srgb, var(--ink) 16%, transparent);
 
   /* Banda de contacto: en claro, bloque azul; en oscuro, banda con título en acento */
@@ -77,6 +82,11 @@
     --muted: #A3AAB6;
     --accent: #D4B483;    /* arena */
     --on-accent: #141A24;
+    --brick: #DE8A73;        /* ladrillo claro para detalles sobre fondo oscuro */
+    --brick-fill: #DE8A73;
+    --on-brick: #141A24;
+    --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo (reemplaza al arena) */
+    --btn-solid-ink: #F3ECE1;
     --band-bg: var(--surface);
     --band-ink: var(--ink);
     --band-em: var(--accent);
@@ -95,6 +105,11 @@
   --muted: #A3AAB6;
   --accent: #D4B483;  /* arena */
   --on-accent: #141A24;
+  --brick: #DE8A73;        /* ladrillo claro para detalles sobre fondo oscuro */
+  --brick-fill: #DE8A73;
+  --on-brick: #141A24;
+  --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo (reemplaza al arena) */
+  --btn-solid-ink: #F3ECE1;
   --band-bg: var(--surface);
   --band-ink: var(--ink);
   --band-em: var(--accent);
@@ -223,9 +238,9 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   color: inherit;
   transition: background-color 0.2s, color 0.2s;
 }
-.btn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.btn--solid { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-.btn--solid:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.btn:hover { background: var(--brick-fill); color: var(--on-brick); border-color: var(--brick-fill); }
+.btn--solid { background: var(--btn-solid-bg); color: var(--btn-solid-ink); border-color: var(--btn-solid-bg); }
+.btn--solid:hover { background: var(--brick-fill); border-color: var(--brick-fill); color: var(--on-brick); }
 .section--accent .btn:hover { background: var(--band-ink); color: var(--band-bg); border-color: var(--band-ink); }
 
 .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: var(--space-m); }
@@ -501,7 +516,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 .service h3 { font-size: var(--step-2); }
 /* El título de cada servicio lleva al caso relacionado */
 .service__link { text-decoration: none; }
-.service__link span[aria-hidden] { display: inline-block; font-size: 0.7em; color: var(--accent); transition: transform 0.2s; }
+.service__link span[aria-hidden] { display: inline-block; font-size: 0.7em; color: var(--brick); transition: transform 0.2s; }
 .service__link:hover { text-decoration: underline; text-decoration-thickness: 1px; }
 .service__link:hover span[aria-hidden] { transform: translateX(4px); }
 .service p { color: var(--muted); max-width: 52ch; }
@@ -511,7 +526,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--brick);
 }
 @media (min-width: 48rem) {
   .service { grid-template-columns: 1fr 1fr; column-gap: 3rem; align-items: start; }
@@ -627,7 +642,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   font-size: var(--step-2);
   font-weight: 400;
   line-height: 1;
-  color: var(--accent);
+  color: var(--brick);
   font-variant-numeric: tabular-nums;
 }
 @media (min-width: 64rem) { .case__body { grid-template-columns: 1fr 1fr; column-gap: 4rem; } }
@@ -641,8 +656,8 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   text-transform: uppercase;
   padding: 0.35em 0.8em;
   border-radius: 999px;
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--brick-fill);
+  color: var(--on-brick);
 }
 
 /* Diagrama del journey: pasos conectados.
