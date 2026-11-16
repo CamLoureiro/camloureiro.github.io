@@ -24,30 +24,30 @@
    izquierda, títulos serif grandes como protagonistas.
    --------------------------------------------------------- */
 :root {
-  /* Colores · modo claro */
-  --bg: #F3ECE1;        /* fondo general: papel cálido */
-  --surface: #E4D5BE;   /* bandas de color: arena */
-  --ink: #221A13;       /* texto principal: marrón espresso */
-  --muted: #6A5B47;     /* texto secundario */
-  --accent: #2C3B54;    /* acento: azul tinta (viene de tu referencia) */
-  --on-accent: #F3ECE1; /* texto sobre el acento */
-  --brick: #963D2C;      /* tercer color: ladrillo, para detalles (etiquetas, números, flechas) */
-  --brick-fill: #963D2C; /* relleno ladrillo para el hover de los botones */
-  --on-brick: #F3ECE1;   /* texto sobre el relleno ladrillo */
-  --btn-solid-bg: var(--accent);  /* botón principal: azul tinta */
+  /* Colores · modo claro: base neutra (blanco roto y grafito) con ladrillo como color de marca */
+  --bg: #FAF8F5;        /* fondo general: blanco roto */
+  --surface: #EFEBE5;   /* bandas: gris cálido muy claro */
+  --ink: #1E1C1A;       /* texto principal: grafito */
+  --muted: #5E5952;     /* texto secundario */
+  --accent: #963D2C;    /* acento y color de marca: ladrillo */
+  --on-accent: #FAF8F5; /* texto sobre el acento */
+  --brick: #963D2C;      /* ladrillo para detalles (etiquetas, números, flechas) */
+  --brick-fill: #1E1C1A; /* hover de los botones: grafito (el botón ya es ladrillo) */
+  --on-brick: #FAF8F5;   /* texto sobre ese relleno */
+  --btn-solid-bg: var(--accent);  /* botón principal: ladrillo */
   --btn-solid-ink: var(--on-accent);
-  --line: color-mix(in srgb, var(--ink) 16%, transparent);
+  --line: color-mix(in srgb, var(--ink) 14%, transparent);
 
-  /* Banda de contacto: en claro, bloque azul; en oscuro, banda con título en acento */
-  --band-bg: var(--accent);
-  --band-ink: var(--on-accent);
-  --band-em: var(--on-accent);
+  /* Banda de contacto: en claro, bloque grafito con título en ladrillo claro */
+  --band-bg: var(--ink);
+  --band-ink: var(--bg);
+  --band-em: #DE8A73;
 
-  /* Colores de la ilustración del hero (montañas) */
-  --hill-1: #C9B496;
-  --hill-2: #A8916F;
-  --hill-3: #7C6A4F;
-  --sky: #E9DFCF;
+  /* Colores de la ilustración del hero (montañas): grises cálidos */
+  --hill-1: #D9D2C8;
+  --hill-2: #BFB5A8;
+  --hill-3: #958A7C;
+  --sky: #F2EEE9;
 
   /* Tipografías (Google Fonts, gratuitas) */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -73,52 +73,52 @@
 }
 
 /* Modo oscuro automático (según la configuración del dispositivo).
-   Paleta "Día y noche": de noche el fondo es azul tinta y el acento, ladrillo profundo. */
+   Paleta neutra: de noche el fondo es espresso y el acento, ladrillo profundo. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #141A24;        /* azul noche */
-    --surface: #1E2735;
+    --bg: #1A1715; /* espresso: casi negro, cálido */
+    --surface: #26211D;
     --ink: #EFE6D8;
-    --muted: #A3AAB6;
-    --accent: #A9483A;    /* ladrillo profundo (antes arena) */
-    --on-accent: #F3ECE1;
-    --brick: #DE8A73;        /* ladrillo claro para detalles sobre fondo oscuro */
+    --muted: #AFA393;
+    --accent: #B4503F; /* ladrillo profundo (un punto más claro para leerse sobre las bandas) */
+    --on-accent: #FFFFFF;
+    --brick: #DE8A73; /* ladrillo claro para detalles sobre fondo oscuro */
     --brick-fill: #DE8A73;
-    --on-brick: #141A24;
+    --on-brick: #1A1715;
     --focus: var(--brick); /* foco de teclado bien visible */
-    --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo (reemplaza al arena) */
+    --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo */
     --btn-solid-ink: #F3ECE1;
     --band-bg: var(--surface);
     --band-ink: var(--ink);
-    --band-em: var(--brick); /* sobre la banda, el ladrillo claro se lee mejor */
-    --hill-1: #3A4558;
-    --hill-2: #2C3646;
-    --hill-3: #222A38;
-    --sky: #1A2230;
+    --band-em: var(--brick);
+    --hill-1: #3A332D;
+    --hill-2: #2E2924;
+    --hill-3: #221E1A;
+    --sky: #211D1A;
     color-scheme: dark;
   }
 }
 /* Igual que arriba, por si alguna vez agregás un botón para elegir tema */
 :root[data-theme="dark"] {
-  --bg: #141A24;    /* azul noche */
-  --surface: #1E2735;
+  --bg: #1A1715; /* espresso: casi negro, cálido */
+  --surface: #26211D;
   --ink: #EFE6D8;
-  --muted: #A3AAB6;
-  --accent: #A9483A;    /* ladrillo profundo (antes arena) */
-  --on-accent: #F3ECE1;
-  --brick: #DE8A73;        /* ladrillo claro para detalles sobre fondo oscuro */
+  --muted: #AFA393;
+  --accent: #B4503F; /* ladrillo profundo (un punto más claro para leerse sobre las bandas) */
+  --on-accent: #FFFFFF;
+  --brick: #DE8A73; /* ladrillo claro para detalles sobre fondo oscuro */
   --brick-fill: #DE8A73;
-  --on-brick: #141A24;
-  --focus: var(--brick);
-  --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo (reemplaza al arena) */
+  --on-brick: #1A1715;
+  --focus: var(--brick); /* foco de teclado bien visible */
+  --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo */
   --btn-solid-ink: #F3ECE1;
   --band-bg: var(--surface);
   --band-ink: var(--ink);
-  --band-em: var(--brick); /* sobre la banda, el ladrillo claro se lee mejor */
-  --hill-1: #3A4558;
-  --hill-2: #2C3646;
-  --hill-3: #222A38;
-  --sky: #1A2230;
+  --band-em: var(--brick);
+  --hill-1: #3A332D;
+  --hill-2: #2E2924;
+  --hill-3: #221E1A;
+  --sky: #211D1A;
   color-scheme: dark;
 }
 
@@ -658,8 +658,8 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   text-transform: uppercase;
   padding: 0.35em 0.8em;
   border-radius: 999px;
-  background: var(--brick-fill);
-  color: var(--on-brick);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 /* Diagrama del journey: pasos conectados.
