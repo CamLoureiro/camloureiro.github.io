@@ -25,29 +25,32 @@
    --------------------------------------------------------- */
 :root {
   /* Colores · modo claro: base neutra (blanco roto y grafito) con ladrillo como color de marca */
-  --bg: #FAF8F5;        /* fondo general: blanco roto */
-  --surface: #EFEBE5;   /* bandas: gris cálido muy claro */
-  --ink: #1E1C1A;       /* texto principal: grafito */
-  --muted: #5E5952;     /* texto secundario */
+  --bg: #FFFFFF;        /* fondo general: blanco */
+  --surface: #F2F2F0;   /* bandas: gris neutro muy claro */
+  --ink: #1E1E1D;       /* texto principal: grafito */
+  --muted: #5C5C5A;     /* texto secundario */
   --accent: #963D2C;    /* acento y color de marca: ladrillo */
-  --on-accent: #FAF8F5; /* texto sobre el acento */
+  --on-accent: #FFFFFF; /* texto sobre el acento */
   --brick: #963D2C;      /* ladrillo para detalles (etiquetas, números, flechas) */
-  --brick-fill: #1E1C1A; /* hover de los botones: grafito (el botón ya es ladrillo) */
-  --on-brick: #FAF8F5;   /* texto sobre ese relleno */
+  --brick-fill: #1E1E1D; /* hover de los botones: grafito (el botón ya es ladrillo) */
+  --on-brick: #FFFFFF;   /* texto sobre ese relleno */
   --btn-solid-bg: var(--accent);  /* botón principal: ladrillo */
   --btn-solid-ink: var(--on-accent);
   --line: color-mix(in srgb, var(--ink) 14%, transparent);
 
-  /* Banda de contacto: en claro, bloque grafito con título en ladrillo claro */
-  --band-bg: var(--ink);
-  --band-ink: var(--bg);
-  --band-em: #DE8A73;
+  /* Banda de contacto: en claro, un velo de ladrillo con título en ladrillo */
+  --band-bg: #F7ECE8;
+  --band-ink: var(--ink);
+  --band-em: var(--accent);
 
-  /* Colores de la ilustración del hero (montañas): grises cálidos */
-  --hill-1: #D9D2C8;
-  --hill-2: #BFB5A8;
-  --hill-3: #958A7C;
-  --sky: #F2EEE9;
+  /* Palabras destacadas en cursiva de los títulos grandes */
+  --em: var(--accent);
+
+  /* Colores de la ilustración del hero (montañas): grises neutros */
+  --hill-1: #E2E2DF;
+  --hill-2: #C9C9C5;
+  --hill-3: #9E9E99;
+  --sky: #F7F7F5;
 
   /* Tipografías (Google Fonts, gratuitas) */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -91,6 +94,7 @@
     --band-bg: var(--surface);
     --band-ink: var(--ink);
     --band-em: var(--brick);
+    --em: var(--brick); /* mismo ladrillo claro que la banda de contacto */
     --hill-1: #3A332D;
     --hill-2: #2E2924;
     --hill-3: #221E1A;
@@ -115,6 +119,7 @@
   --band-bg: var(--surface);
   --band-ink: var(--ink);
   --band-em: var(--brick);
+  --em: var(--brick);
   --hill-1: #3A332D;
   --hill-2: #2E2924;
   --hill-3: #221E1A;
@@ -243,6 +248,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 .btn:hover { background: var(--brick-fill); color: var(--on-brick); border-color: var(--brick-fill); }
 .btn--solid { background: var(--btn-solid-bg); color: var(--btn-solid-ink); border-color: var(--btn-solid-bg); }
 .btn--solid:hover { background: var(--brick-fill); border-color: var(--brick-fill); color: var(--on-brick); }
+.section--accent .btn { background: var(--btn-solid-bg); color: var(--btn-solid-ink); border-color: var(--btn-solid-bg); }
 .section--accent .btn:hover { background: var(--band-ink); color: var(--band-bg); border-color: var(--band-ink); }
 
 .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: var(--space-m); }
@@ -477,7 +483,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
 }
 .hero h1 { font-size: var(--step-4); font-weight: 350; line-height: 0.98; }
-.hero h1 em { font-style: italic; color: var(--accent); }
+.hero h1 em { font-style: italic; color: var(--em); }
 .hero__meta {
   display: flex;
   flex-wrap: wrap;
@@ -556,7 +562,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   border-bottom: 1px solid var(--line);
 }
 .page-hero h1 { font-size: var(--step-4); font-weight: 350; margin-bottom: var(--space-m); }
-.page-hero h1 em { font-style: italic; color: var(--accent); }
+.page-hero h1 em { font-style: italic; color: var(--em); }
 
 /* --- About --- */
 .about-grid { display: grid; gap: var(--space-m); }
