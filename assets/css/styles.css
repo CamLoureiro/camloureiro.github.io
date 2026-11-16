@@ -73,23 +73,24 @@
 }
 
 /* Modo oscuro automático (según la configuración del dispositivo).
-   Paleta "Día y noche": de noche el fondo es azul tinta y el acento, arena. */
+   Paleta "Día y noche": de noche el fondo es azul tinta y el acento, ladrillo profundo. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #141A24;        /* azul noche */
     --surface: #1E2735;
     --ink: #EFE6D8;
     --muted: #A3AAB6;
-    --accent: #D4B483;    /* arena */
-    --on-accent: #141A24;
+    --accent: #A9483A;    /* ladrillo profundo (antes arena) */
+    --on-accent: #F3ECE1;
     --brick: #DE8A73;        /* ladrillo claro para detalles sobre fondo oscuro */
     --brick-fill: #DE8A73;
     --on-brick: #141A24;
+    --focus: var(--brick); /* foco de teclado bien visible */
     --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo (reemplaza al arena) */
     --btn-solid-ink: #F3ECE1;
     --band-bg: var(--surface);
     --band-ink: var(--ink);
-    --band-em: var(--accent);
+    --band-em: var(--brick); /* sobre la banda, el ladrillo claro se lee mejor */
     --hill-1: #3A4558;
     --hill-2: #2C3646;
     --hill-3: #222A38;
@@ -103,16 +104,17 @@
   --surface: #1E2735;
   --ink: #EFE6D8;
   --muted: #A3AAB6;
-  --accent: #D4B483;  /* arena */
-  --on-accent: #141A24;
+  --accent: #A9483A;    /* ladrillo profundo (antes arena) */
+  --on-accent: #F3ECE1;
   --brick: #DE8A73;        /* ladrillo claro para detalles sobre fondo oscuro */
   --brick-fill: #DE8A73;
   --on-brick: #141A24;
+  --focus: var(--brick);
   --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo (reemplaza al arena) */
   --btn-solid-ink: #F3ECE1;
   --band-bg: var(--surface);
   --band-ink: var(--ink);
-  --band-em: var(--accent);
+  --band-em: var(--brick); /* sobre la banda, el ladrillo claro se lee mejor */
   --hill-1: #3A4558;
   --hill-2: #2C3646;
   --hill-3: #222A38;
@@ -172,7 +174,7 @@ p { margin: 0; text-wrap: pretty; }
 a { color: inherit; text-underline-offset: 0.2em; }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus, var(--accent));
   outline-offset: 3px;
 }
 
