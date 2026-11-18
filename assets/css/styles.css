@@ -353,10 +353,6 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 }
 .lang-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 
-/* Botón "Hablemos" de la barra: redondeado, solo en desktop */
-.btn--pill { border-radius: 999px; }
-.header-cta { display: none; padding: 0.75em 1.3em; font-size: 0.8rem; }
-
 /* Botón hamburguesa (solo celular y tablet) */
 .menu-btn {
   display: inline-flex;
@@ -425,7 +421,6 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 /* Desktop: el menú pasa a ser una fila de links dentro de la barra */
 @media (min-width: 64rem) {
   .menu-btn { display: none; }
-  .header-cta { display: inline-flex; }
   .header-actions { gap: 1rem; }
 
   .menu {
@@ -438,7 +433,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
     visibility: visible;
     overflow: visible;
   }
-  .menu__list { display: flex; gap: 2rem; }
+  .menu__list { display: flex; align-items: center; gap: 2rem; }
   .menu__list a {
     padding-block: 0.4rem;
     border-bottom: 2px solid transparent;
@@ -447,6 +442,17 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   }
   .menu__list a:hover { border-bottom-color: currentColor; }
   .menu__list a[aria-current="page"] { border-bottom-color: var(--brick); }
+  /* "Contacto" se ve como botón: relleno en el color de acento y redondeado */
+  .menu__list a.menu__cta {
+    padding: 0.6em 1.3em;
+    border: 0;
+    border-radius: 999px;
+    background: var(--btn-solid-bg);
+    color: var(--btn-solid-ink);
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .menu__list a.menu__cta:hover { background: var(--brick-fill); color: var(--on-brick); }
   .menu__list small,
   .menu__footer { display: none; }
 }
