@@ -24,22 +24,22 @@
    izquierda, títulos serif grandes como protagonistas.
    --------------------------------------------------------- */
 :root {
-  /* Colores · modo claro: fondos blanco y gris muy clarito; la calidez la ponen
-     los acentos en ladrillo (botones, etiquetas, palabras destacadas) */
+  /* Colores · modo claro: fondos blanco y gris muy clarito; el color lo ponen
+     los acentos en borravino (botones, etiquetas, palabras destacadas) */
   --bg: #FFFFFF;        /* fondo general: blanco */
   --surface: #F5F5F4;   /* bandas: gris neutro muy clarito */
   --ink: #1E1E1D;       /* texto principal: grafito */
   --muted: #5C5C5A;     /* texto secundario */
-  --accent: #963D2C;    /* acento y color de marca: ladrillo */
+  --accent: #5E1A2E;    /* acento y color de marca: borravino */
   --on-accent: #FFFFFF; /* texto sobre el acento */
-  --brick: #963D2C;      /* ladrillo para detalles (etiquetas, números, flechas) */
-  --brick-fill: #1E1E1D; /* hover de los botones: grafito (el botón ya es ladrillo) */
+  --brick: #5E1A2E;      /* borravino para detalles (etiquetas, números, flechas) */
+  --brick-fill: #1E1E1D; /* hover de los botones: grafito (el botón ya es borravino) */
   --on-brick: #FFFFFF;   /* texto sobre ese relleno */
-  --btn-solid-bg: var(--accent);  /* botón principal: ladrillo */
+  --btn-solid-bg: var(--accent);  /* botón principal: borravino */
   --btn-solid-ink: var(--on-accent);
   --line: color-mix(in srgb, var(--ink) 14%, transparent);
 
-  /* Banda de contacto: mismo gris clarito que las otras bandas, con título en ladrillo */
+  /* Banda de contacto: mismo gris clarito que las otras bandas, con título en borravino */
   --band-bg: var(--surface);
   --band-ink: var(--ink);
   --band-em: var(--accent);
@@ -77,20 +77,20 @@
 }
 
 /* Modo oscuro automático (según la configuración del dispositivo, sin botón).
-   Paleta "oscuro neutro": grafito casi negro, texto blanco suave y ladrillo de acento. */
+   Paleta "oscuro neutro": grafito casi negro, texto blanco suave y borravino de acento. */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #161616;      /* fondo: grafito casi negro */
     --surface: #222221; /* bandas */
     --ink: #EDEDEC;     /* texto: blanco suave */
     --muted: #A3A3A0;   /* texto secundario */
-    --accent: #B4503F;  /* ladrillo (punto del logo, chips, pasos) */
-    --on-accent: #FFFFFF;
-    --brick: #D9765F;   /* ladrillo claro: detalles y destacados sobre fondo oscuro */
-    --brick-fill: #D9765F;
+    --accent: #C2738A;  /* borravino claro (punto del logo, chips, pasos): se lee sobre fondo oscuro */
+    --on-accent: #161616;
+    --brick: #C2738A;   /* borravino claro: detalles y destacados sobre fondo oscuro */
+    --brick-fill: #C2738A;
     --on-brick: #161616;
     --focus: var(--brick); /* foco de teclado bien visible */
-    --btn-solid-bg: #A9483A; /* botón principal */
+    --btn-solid-bg: #5E1A2E; /* botón principal: borravino */
     --btn-solid-ink: #FFFFFF;
     --band-bg: var(--surface);
     --band-ink: var(--ink);
@@ -304,7 +304,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 
 /* Logo: solo la marca CA·LO (CAmila LOureiro), igual en header y footer.
    Sin círculo y sin el nombre al costado (el nombre ya está en el footer).
-   El punto es un círculo en ladrillo, centrado a la altura media de las mayúsculas. */
+   El punto es un círculo en el color de acento, centrado a la altura media de las mayúsculas. */
 .logo {
   display: inline-flex;
   align-items: center;
