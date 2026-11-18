@@ -182,7 +182,13 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 
 .section { padding-block: var(--space-l); }
 .section--surface { background: var(--surface); }
-.section--accent { background: var(--band-bg); color: var(--band-ink); }
+.section--accent {
+  background: var(--band-bg);
+  color: var(--band-ink);
+  padding-block: clamp(3rem, 2rem + 3vw, 4.75rem); /* banda de contacto: menos alta que las otras secciones */
+}
+/* La sección anterior a la banda de contacto también deja menos espacio abajo */
+.section:has(+ .section--accent) { padding-bottom: clamp(3rem, 2rem + 3vw, 4.75rem); }
 .section--accent h2 em { color: var(--band-em); }
 
 /* Texto chico en mayúsculas arriba de los títulos */
@@ -265,6 +271,9 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   font-size: 0.9rem;
   text-align: center;
 }
+
+/* Texto solo para lectores de pantalla (no se ve, pero se lee) */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* Link para saltar al contenido (accesibilidad con teclado) */
 .skip-link {
@@ -493,11 +502,12 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   .hero__text { padding-left: 4rem; }
 }
 
-/* Intro "Hola, esto es lo que hago" */
+/* Intro: texto + imagen (placeholder por ahora) */
 .intro { display: grid; gap: var(--space-m); }
-.intro h2 { font-size: var(--step-3); }
+.intro__art { min-height: 16rem; }
 @media (min-width: 64rem) {
-  .intro { grid-template-columns: 1fr 1fr; align-items: start; gap: 4rem; }
+  .intro { grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; }
+  .intro__art { min-height: 22rem; }
 }
 
 /* Lista de servicios */
@@ -542,6 +552,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 /* Banda final de contacto */
 .cta { display: grid; gap: var(--space-m); justify-items: start; }
 .cta h2 { font-size: var(--step-3); max-width: 16ch; }
+.cta h2.cta__title--wide { max-width: none; } /* títulos cortos: en una sola línea */
 .cta h2 em { font-style: italic; }
 
 
