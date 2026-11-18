@@ -321,32 +321,34 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   height: var(--header-h);
 }
 
-/* Logo: marca CA·LO (CAmila LOureiro) arriba y el nombre completo chico debajo.
-   El punto medio va en ladrillo: es el detalle de color de la marca. */
+/* Logo: solo la marca CA·LO (CAmila LOureiro), igual en header y footer.
+   Sin círculo y sin el nombre al costado (el nombre ya está en el footer).
+   El punto es un círculo en ladrillo, centrado a la altura media de las mayúsculas. */
 .logo {
   display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.15rem;
+  align-items: center;
   text-decoration: none;
   line-height: 1;
 }
 .logo__mark {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 1.6rem;
+  font-size: 1.45rem; /* celular: un poco más chico */
   letter-spacing: 0.06em;
 }
 .logo__dot {
-  color: var(--accent);
-  font-weight: 600; /* un poco más grueso para que el punto no se pierda en tamaño chico */
+  display: inline-block;
+  width: 0.22em;
+  height: 0.22em;
+  margin: 0 0.24em 0 0.18em; /* el espacio de la derecha compensa el letter-spacing de la A */
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-0.04em); /* sube el punto al medio de las mayúsculas (no de las minúsculas) */
 }
-.logo__name {
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted, currentColor);
+@media (min-width: 48em) {
+  .logo__mark { font-size: 1.75rem; } /* desktop: tamaño completo */
 }
 
 .header-actions { display: flex; align-items: center; gap: 0.5rem; }
