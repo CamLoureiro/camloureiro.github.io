@@ -39,8 +39,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Instrument+Sans:wght@400..600&display=swap">
 
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261118d">
-  <script src="assets/js/main.js?v=20261118d" defer></script>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261118e">
+  <script src="assets/js/main.js?v=20261118e" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main"><span data-lang="en">Skip to content</span><span data-lang="es">Ir al contenido</span></a>
@@ -85,8 +85,8 @@
     <!-- ===== HERO ===== -->
     <section class="hero">
       <div class="hero__text">
-        <h1 data-lang="en">Thinking about what to build, <em>and for whom.</em></h1>
-        <h1 data-lang="es">Pensar qué construir, <em>y para quién.</em></h1>
+        <h1 data-lang="en">Thinking about what to build, <em>and why.</em></h1>
+        <h1 data-lang="es">Pensar qué construir, <em>y para qué.</em></h1>
         <div class="hero__meta">
           <span>Email marketing</span>
           <span><span data-lang="en">Implementation</span><span data-lang="es">Implementación</span></span>
@@ -106,16 +106,14 @@
       </div>
     </section>
 
-    <!-- ===== INTRO ===== -->
-    <section class="section">
+    <!-- ===== INTRO: texto a la izquierda, imagen (por ahora placeholder) a la derecha ===== -->
+    <section class="section" aria-labelledby="intro-title">
+      <!-- Título solo para lectores de pantalla (no se ve) -->
+      <h2 class="sr-only" id="intro-title"><span data-lang="en">What I do</span><span data-lang="es">Lo que hago</span></h2>
       <div class="wrap intro">
         <div class="reveal">
-          <span class="eyebrow" data-lang="en">Hello</span><span class="eyebrow" data-lang="es">Hola</span>
-          <h2 data-lang="en">This is what I do</h2><h2 data-lang="es">Esto es lo que hago</h2>
-        </div>
-        <div class="reveal">
           <div class="prose">
-            <p class="lead" data-lang="en">I'm Camila. For more than 10 years I've built emails, landing pages and automated journeys, working between the technical side and the business side.</p><p class="lead" data-lang="es">Soy Camila. Hace más de 10 años construyo emails, landing pages y journeys automatizados, entre el lado técnico y el de negocio.</p>
+            <p class="lead" data-lang="en">For more than 10 years I've built emails, landing pages and automated journeys, working between the technical side and the business side.</p><p class="lead" data-lang="es">Hace más de 10 años construyo emails, landing pages y journeys automatizados, entre el lado técnico y el de negocio.</p>
             <p data-lang="en">I enjoy figuring out what to build and for whom, and getting teams aligned to make it happen.</p><p data-lang="es">Disfruto entender qué construir y para quién, y alinear equipos para lograrlo.</p>
           </div>
           <div class="btn-row">
@@ -123,6 +121,8 @@
             <a class="btn" href="about.html"><span data-lang="en">About me</span><span data-lang="es">Sobre mí</span></a>
           </div>
         </div>
+        <!-- Placeholder: acá va a ir una imagen que resuma cómo trabajo (tipo flujo). Todavía sin definir. -->
+        <div class="placeholder intro__art reveal" aria-hidden="true"><span data-lang="en">Image coming soon</span><span data-lang="es">Imagen en preparación</span></div>
       </div>
     </section>
 
@@ -131,8 +131,8 @@
       <div class="wrap">
         <div class="section-head reveal">
           <span class="eyebrow" data-lang="en">Services</span><span class="eyebrow" data-lang="es">Servicios</span>
-          <h2 data-lang="en">How I can help</h2><h2 data-lang="es">En qué puedo ayudarte</h2>
-          <p data-lang="en">From a single email to a whole process.</p><p data-lang="es">Desde un email hasta un proceso completo.</p>
+          <h2 data-lang="en">How I can help</h2><h2 data-lang="es">Cómo puedo sumar</h2>
+          <p data-lang="en">Five ways to work together, depending on what you need.</p><p data-lang="es">Cinco formas de trabajar juntos, según lo que necesites.</p>
         </div>
         <ul class="services">
         <li class="service reveal">
@@ -183,9 +183,9 @@
     <section class="section section--accent">
       <div class="wrap cta reveal">
         <span class="eyebrow" data-lang="en">Let's talk</span><span class="eyebrow" data-lang="es">Hablemos</span>
-        <h2 data-lang="en">Tell me what you need <em>and let's see how I can help.</em></h2>
-        <h2 data-lang="es">Contame qué necesitás <em>y vemos cómo te ayudo.</em></h2>
-        <a class="btn" href="contacto.html"><span data-lang="en">Get in touch</span><span data-lang="es">Contactame</span></a>
+        <h2 data-lang="en"><em>Need a hand?</em></h2>
+        <h2 data-lang="es"><em>¿Necesitás una mano?</em></h2>
+        <a class="btn" href="contacto.html"><span data-lang="en">Drop me a line</span><span data-lang="es">Escribime</span></a>
       </div>
     </section>
 
@@ -197,7 +197,7 @@
       <div class="footer-grid">
         <div>
           <a class="logo" href="index.html" aria-label="Camila Loureiro"><span class="logo__mark" aria-hidden="true">CA<span class="logo__dot"></span>LO</span></a>
-          <p class="muted" style="margin-top:1rem;max-width:34ch"><span data-lang="en">Email marketing, implementation and process work for teams that want things done well.</span><span data-lang="es">Email marketing, implementación y procesos para equipos que quieren hacer las cosas bien.</span></p>
+          <p class="muted" style="margin-top:1rem;max-width:34ch"><span data-lang="en">From idea to launch.</span><span data-lang="es">De la idea al lanzamiento.</span></p>
         </div>
         <nav aria-label="Footer">
           <ul>
