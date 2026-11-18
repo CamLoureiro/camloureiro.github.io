@@ -18,7 +18,7 @@
   <meta property="og:image:alt" content="Camila Loureiro: Thinking about what to build, and for whom.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#1A1715" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#161616" media="(prefers-color-scheme: dark)">
 
   <!-- Elige el idioma ANTES de mostrar la página (evita que parpadee).
        1º lo que la persona eligió antes · 2º el idioma de su navegador. -->
@@ -39,8 +39,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Instrument+Sans:wght@400..600&display=swap">
 
-  <link rel="stylesheet" href="/assets/css/styles.css?v=20261118">
-  <script src="/assets/js/main.js?v=20261118" defer></script>
+  <link rel="stylesheet" href="/assets/css/styles.css?v=20261118b">
+  <script src="/assets/js/main.js?v=20261118b" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main"><span data-lang="en">Skip to content</span><span data-lang="es">Ir al contenido</span></a>
@@ -53,11 +53,27 @@
         <span class="logo__mark" aria-hidden="true">CA<span class="logo__dot"></span>LO</span>
       </a>
 
+      <!-- Menú: en desktop, links en fila dentro de la barra; en celular, pantalla completa que se abre con la hamburguesa -->
+      <nav class="menu" id="menu" data-aria-en="Main menu" data-aria-es="Menú principal">
+        <ul class="menu__list">
+            <li><a href="/"><small>01</small><span data-lang="en">Home</span><span data-lang="es">Inicio</span></a></li>
+            <li><a href="/about.html"><small>02</small><span data-lang="en">About me</span><span data-lang="es">Sobre mí</span></a></li>
+            <li><a href="/casos.html"><small>03</small><span data-lang="en">Case studies</span><span data-lang="es">Casos</span></a></li>
+            <li><a href="/contacto.html"><small>04</small><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
+        </ul>
+        <div class="menu__footer">
+          <a href="https://www.linkedin.com/in/camilaloureiro/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <span>Buenos Aires, Argentina · <span data-lang="en">Working remotely</span><span data-lang="es">Trabajo remoto</span></span>
+        </div>
+      </nav>
+
       <div class="header-actions">
         <div class="lang-toggle" role="group" aria-label="Language / Idioma">
           <button type="button" data-set-lang="es" aria-pressed="false" lang="es">ES</button>
           <button type="button" data-set-lang="en" aria-pressed="false" lang="en">EN</button>
         </div>
+        <!-- Llamado a la acción fijo en la barra (solo desktop) -->
+        <a class="btn btn--solid btn--pill header-cta" href="/contacto.html"><span data-lang="en">Let's talk</span><span data-lang="es">Hablemos</span></a>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">
           <span class="menu-btn__label"><span data-lang="en">Menu</span><span data-lang="es">Menú</span></span>
           <span class="menu-btn__icon" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -65,21 +81,6 @@
       </div>
     </div>
   </header>
-
-  <!-- ===== MENÚ (panel lateral en desktop, pantalla completa en celular) ===== -->
-  <div class="menu-backdrop" aria-hidden="true"></div>
-  <nav class="menu" id="menu" data-aria-en="Main menu" data-aria-es="Menú principal">
-    <ul class="menu__list">
-        <li><a href="/"><small>01</small><span data-lang="en">Home</span><span data-lang="es">Inicio</span></a></li>
-        <li><a href="/about.html"><small>02</small><span data-lang="en">About me</span><span data-lang="es">Sobre mí</span></a></li>
-        <li><a href="/casos.html"><small>03</small><span data-lang="en">Case studies</span><span data-lang="es">Casos</span></a></li>
-        <li><a href="/contacto.html"><small>04</small><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
-    </ul>
-    <div class="menu__footer">
-      <a href="https://www.linkedin.com/in/camilaloureiro/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <span>Buenos Aires, Argentina · <span data-lang="en">Working remotely</span><span data-lang="es">Trabajo remoto</span></span>
-    </div>
-  </nav>
 
   <main id="main">
     <section class="wrap page-hero notfound">

@@ -1,7 +1,7 @@
 /* =========================================================
    PORTFOLIO · JavaScript principal
    1. Idioma (ES / EN)
-   2. Menú hamburguesa
+   2. Menú (fila en desktop, hamburguesa en celular)
    3. Animaciones al hacer scroll
    4. Formulario de contacto
    5. Año automático en el footer
@@ -37,10 +37,12 @@ document.querySelectorAll('[data-set-lang]').forEach((btn) => {
 setLanguage(root.lang === 'es' ? 'es' : 'en');
 
 
-/* ---------- 2. MENÚ ---------- */
+/* ---------- 2. MENÚ ----------
+   Desktop (64rem ≈ 1024px o más): los links están siempre a la vista en la barra.
+   Celular y tablet: se abren a pantalla completa con la hamburguesa. */
 const menuBtn = document.querySelector('.menu-btn');
 const menu = document.getElementById('menu');
-const backdrop = document.querySelector('.menu-backdrop');
+const desktop = window.matchMedia('(min-width: 64rem)');
 
 function openMenu() {
   document.body.classList.add('menu-open');
@@ -57,13 +59,24 @@ function closeMenu({ returnFocus = true } = {}) {
   if (returnFocus) menuBtn.focus();
 }
 
+// En desktop el menú siempre se puede usar; en celular, solo cuando está abierto
+function syncMenuMode() {
+  if (desktop.matches) {
+    document.body.classList.remove('menu-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menu.removeAttribute('inert');
+  } else if (!document.body.classList.contains('menu-open')) {
+    menu.setAttribute('inert', ''); // cerrado: no se puede tabular adentro
+  }
+}
+
 if (menuBtn && menu) {
-  menu.setAttribute('inert', ''); // cerrado al inicio: no se puede tabular adentro
+  syncMenuMode();
+  desktop.addEventListener('change', syncMenuMode); // por si cambia el ancho de la ventana
 
   menuBtn.addEventListener('click', () => {
     menuBtn.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
   });
-  backdrop?.addEventListener('click', () => closeMenu());
 
   // Cerrar con la tecla Escape
   document.addEventListener('keydown', (e) => {
@@ -72,7 +85,9 @@ if (menuBtn && menu) {
 
   // Cerrar al elegir un link (útil para links a #anclas en la misma página)
   menu.querySelectorAll('a').forEach((a) => {
-    a.addEventListener('click', () => closeMenu({ returnFocus: false }));
+    a.addEventListener('click', () => {
+      if (!desktop.matches) closeMenu({ returnFocus: false });
+    });
   });
 }
 
