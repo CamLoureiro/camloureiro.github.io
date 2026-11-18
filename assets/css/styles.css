@@ -321,29 +321,32 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   height: var(--header-h);
 }
 
-/* Logo provisorio: monograma + nombre */
+/* Logo: marca CA·LO (CAmila LOureiro) arriba y el nombre completo chico debajo.
+   El punto medio va en ladrillo: es el detalle de color de la marca. */
 .logo {
   display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
   text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-size: 0.85rem;
+  line-height: 1;
 }
 .logo__mark {
-  display: grid;
-  place-items: center;
-  width: 2.3rem;
-  height: 2.3rem;
-  border: 1px solid currentColor;
-  border-radius: 50%;
   font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1rem;
-  letter-spacing: 0;
-  text-transform: none;
+  font-weight: 500;
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+}
+.logo__dot {
+  color: var(--accent);
+  font-weight: 600; /* un poco más grueso para que el punto no se pierda en tamaño chico */
+}
+.logo__name {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted, currentColor);
 }
 
 .header-actions { display: flex; align-items: center; gap: 0.5rem; }
