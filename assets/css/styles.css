@@ -6,7 +6,7 @@
    1. Tokens (colores, tipografías, espacios)  ← acá cambiás la identidad
    2. Base y reset
    3. Utilidades (contenedor, botones, etiquetas)
-   4. Header + menú lateral
+   4. Header + menú (fila en desktop, hamburguesa en celular)
    5. Secciones del index
    6. Páginas internas (About, Casos, Contacto)
    7. Footer
@@ -24,9 +24,10 @@
    izquierda, títulos serif grandes como protagonistas.
    --------------------------------------------------------- */
 :root {
-  /* Colores · modo claro: base neutra (blanco roto y grafito) con ladrillo como color de marca */
+  /* Colores · modo claro: fondos blanco y gris muy clarito; la calidez la ponen
+     los acentos en ladrillo (botones, etiquetas, palabras destacadas) */
   --bg: #FFFFFF;        /* fondo general: blanco */
-  --surface: #F2F2F0;   /* bandas: gris neutro muy claro */
+  --surface: #F5F5F4;   /* bandas: gris neutro muy clarito */
   --ink: #1E1E1D;       /* texto principal: grafito */
   --muted: #5C5C5A;     /* texto secundario */
   --accent: #963D2C;    /* acento y color de marca: ladrillo */
@@ -38,8 +39,8 @@
   --btn-solid-ink: var(--on-accent);
   --line: color-mix(in srgb, var(--ink) 14%, transparent);
 
-  /* Banda de contacto: en claro, un velo de ladrillo con título en ladrillo */
-  --band-bg: #F7ECE8;
+  /* Banda de contacto: mismo gris clarito que las otras bandas, con título en ladrillo */
+  --band-bg: var(--surface);
   --band-ink: var(--ink);
   --band-em: var(--accent);
 
@@ -66,7 +67,7 @@
   /* Espacios */
   --space-s: 1rem;
   --space-m: 2rem;
-  --space-l: clamp(3.5rem, 2.5rem + 5vw, 7rem);
+  --space-l: clamp(4.25rem, 3rem + 5.5vw, 8.5rem); /* aire entre secciones */
   --gutter: max(16px, 5vw);
   --max: 72rem;          /* ancho máximo del contenido */
   --radius: 4px;
@@ -75,56 +76,32 @@
   color-scheme: light;
 }
 
-/* Modo oscuro automático (según la configuración del dispositivo).
-   Paleta neutra: de noche el fondo es espresso y el acento, ladrillo profundo. */
+/* Modo oscuro automático (según la configuración del dispositivo, sin botón).
+   Paleta "oscuro neutro": grafito casi negro, texto blanco suave y ladrillo de acento. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #1A1715; /* espresso: casi negro, cálido */
-    --surface: #26211D;
-    --ink: #EFE6D8;
-    --muted: #AFA393;
-    --accent: #B4503F; /* ladrillo profundo (un punto más claro para leerse sobre las bandas) */
+  :root {
+    --bg: #161616;      /* fondo: grafito casi negro */
+    --surface: #222221; /* bandas */
+    --ink: #EDEDEC;     /* texto: blanco suave */
+    --muted: #A3A3A0;   /* texto secundario */
+    --accent: #B4503F;  /* ladrillo (punto del logo, chips, pasos) */
     --on-accent: #FFFFFF;
-    --brick: #DE8A73; /* ladrillo claro para detalles sobre fondo oscuro */
-    --brick-fill: #DE8A73;
-    --on-brick: #1A1715;
+    --brick: #D9765F;   /* ladrillo claro: detalles y destacados sobre fondo oscuro */
+    --brick-fill: #D9765F;
+    --on-brick: #161616;
     --focus: var(--brick); /* foco de teclado bien visible */
-    --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo */
-    --btn-solid-ink: #F3ECE1;
+    --btn-solid-bg: #A9483A; /* botón principal */
+    --btn-solid-ink: #FFFFFF;
     --band-bg: var(--surface);
     --band-ink: var(--ink);
     --band-em: var(--brick);
-    --em: var(--brick); /* mismo ladrillo claro que la banda de contacto */
-    --hill-1: #3A332D;
-    --hill-2: #2E2924;
-    --hill-3: #221E1A;
-    --sky: #211D1A;
+    --em: var(--brick); /* palabras destacadas de los títulos */
+    --hill-1: #343433;
+    --hill-2: #2A2A29;
+    --hill-3: #1F1F1E;
+    --sky: #1C1C1B;
     color-scheme: dark;
   }
-}
-/* Igual que arriba, por si alguna vez agregás un botón para elegir tema */
-:root[data-theme="dark"] {
-  --bg: #1A1715; /* espresso: casi negro, cálido */
-  --surface: #26211D;
-  --ink: #EFE6D8;
-  --muted: #AFA393;
-  --accent: #B4503F; /* ladrillo profundo (un punto más claro para leerse sobre las bandas) */
-  --on-accent: #FFFFFF;
-  --brick: #DE8A73; /* ladrillo claro para detalles sobre fondo oscuro */
-  --brick-fill: #DE8A73;
-  --on-brick: #1A1715;
-  --focus: var(--brick); /* foco de teclado bien visible */
-  --btn-solid-bg: #A9483A; /* botón principal: ladrillo profundo */
-  --btn-solid-ink: #F3ECE1;
-  --band-bg: var(--surface);
-  --band-ink: var(--ink);
-  --band-em: var(--brick);
-  --em: var(--brick);
-  --hill-1: #3A332D;
-  --hill-2: #2E2924;
-  --hill-3: #221E1A;
-  --sky: #211D1A;
-  color-scheme: dark;
 }
 
 
@@ -166,9 +143,9 @@ img, svg { display: block; max-width: 100%; }
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600; /* títulos en negrita */
   line-height: 1.05;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   text-wrap: balance;
   margin: 0;
 }
@@ -305,12 +282,13 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 /* ---------------------------------------------------------
    4. HEADER + MENÚ
    --------------------------------------------------------- */
+/* Barra fija arriba: queda pegada al hacer scroll.
+   Fondo liso y una línea fina abajo (sin efectos). */
 .site-header {
   position: sticky;
   top: env(safe-area-inset-top, 0px);
   z-index: 50;
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
-  backdrop-filter: blur(8px);
+  background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
 .site-header .wrap {
@@ -320,6 +298,9 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   gap: 1rem;
   height: var(--header-h);
 }
+/* Logo y botones quedan por encima del menú de celular (que se abre debajo de la barra) */
+.site-header .logo,
+.header-actions { position: relative; z-index: 2; }
 
 /* Logo: solo la marca CA·LO (CAmila LOureiro), igual en header y footer.
    Sin círculo y sin el nombre al costado (el nombre ya está en el footer).
@@ -372,21 +353,21 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 }
 .lang-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 
-/* Botón hamburguesa */
+/* Botón "Hablemos" de la barra: redondeado, solo en desktop */
+.btn--pill { border-radius: 999px; }
+.header-cta { display: none; padding: 0.75em 1.3em; font-size: 0.8rem; }
+
+/* Botón hamburguesa (solo celular y tablet) */
 .menu-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
   padding: 0.6rem 0.4rem 0.6rem 0.8rem;
   border: 0;
   background: transparent;
   color: inherit;
-  font: 600 0.8rem/1 var(--font-body);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   cursor: pointer;
 }
-/* En celular el texto "Menú" no se ve, pero los lectores de pantalla sí lo leen */
+/* El texto "Menú" no se ve, pero los lectores de pantalla sí lo leen */
 .menu-btn__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .menu-btn__icon { display: grid; gap: 5px; width: 22px; }
 .menu-btn__icon span {
@@ -400,51 +381,34 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 .menu-btn[aria-expanded="true"] .menu-btn__icon span:nth-child(2) { opacity: 0; }
 .menu-btn[aria-expanded="true"] .menu-btn__icon span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Fondo oscuro detrás del panel (solo se nota en desktop) */
-.menu-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  background: color-mix(in srgb, #000 40%, transparent);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.35s, visibility 0.35s;
-}
-
-/* Panel del menú: en celular ocupa toda la pantalla */
+/* Menú en celular y tablet: pantalla completa, lista con líneas finas */
 .menu {
   position: fixed;
   inset: 0;
-  z-index: 45;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  padding: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 1.5rem) max(var(--gutter), env(safe-area-inset-right, 0px)) calc(2rem + env(safe-area-inset-bottom, 0px)) max(var(--gutter), env(safe-area-inset-left, 0px));
-  background: var(--surface);
-  transform: translateX(100%);
+  padding: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 1rem) max(var(--gutter), env(safe-area-inset-right, 0px)) calc(2rem + env(safe-area-inset-bottom, 0px)) max(var(--gutter), env(safe-area-inset-left, 0px));
+  background: var(--bg);
+  opacity: 0;
   visibility: hidden;
-  transition: transform 0.45s cubic-bezier(0.7, 0, 0.2, 1), visibility 0.45s;
+  transition: opacity 0.3s, visibility 0.3s;
   overflow-y: auto;
 }
-.menu-open .menu { transform: none; visibility: visible; }
-.menu-open .menu-backdrop { opacity: 1; visibility: visible; }
+.menu-open .menu { opacity: 1; visibility: visible; }
 
 .menu__list { list-style: none; margin: 0; padding: 0; display: grid; }
 .menu__list a {
   display: flex;
   align-items: baseline;
   gap: 1rem;
-  padding-block: 0.9rem;
+  padding-block: 1.1rem;
   border-bottom: 1px solid var(--line);
-  font-family: var(--font-display);
-  font-size: var(--step-2); /* mismo tamaño en celular y desktop */
-  line-height: 1.1;
+  font-size: var(--step-1);
   text-decoration: none;
-  transition: padding 0.25s;
 }
-.menu__list a:hover { padding-left: 0.5rem; }
-.menu__list a[aria-current="page"] { font-style: italic; }
+.menu__list a[aria-current="page"] { color: var(--brick); }
 .menu__list small {
-  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
@@ -458,17 +422,33 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   font-size: 0.9rem;
 }
 
-@media (min-width: 48rem) {
-  .menu-btn__label { position: static; width: auto; height: auto; overflow: visible; clip-path: none; }
+/* Desktop: el menú pasa a ser una fila de links dentro de la barra */
+@media (min-width: 64rem) {
+  .menu-btn { display: none; }
+  .header-cta { display: inline-flex; }
+  .header-actions { gap: 1rem; }
 
-  /* En desktop el menú es un panel lateral a la derecha */
   .menu {
-    left: auto;
-    width: min(30rem, 90vw);
-    padding-left: 3rem;
-    padding-right: max(3rem, env(safe-area-inset-right, 0px));
-    box-shadow: -20px 0 60px color-mix(in srgb, #000 15%, transparent);
+    position: static;
+    padding: 0;
+    margin-left: auto;
+    margin-right: 0.5rem;
+    background: none;
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
   }
+  .menu__list { display: flex; gap: 2rem; }
+  .menu__list a {
+    padding-block: 0.4rem;
+    border-bottom: 2px solid transparent;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .menu__list a:hover { border-bottom-color: currentColor; }
+  .menu__list a[aria-current="page"] { border-bottom-color: var(--brick); }
+  .menu__list small,
+  .menu__footer { display: none; }
 }
 
 
@@ -487,7 +467,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
   padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
 }
-.hero h1 { font-size: var(--step-4); font-weight: 350; line-height: 0.98; }
+.hero h1 { font-size: var(--step-4); font-weight: 600; line-height: 1; }
 .hero h1 em { font-style: italic; color: var(--em); }
 .hero__meta {
   display: flex;
@@ -566,7 +546,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   padding-block: var(--space-l) var(--space-m);
   border-bottom: 1px solid var(--line);
 }
-.page-hero h1 { font-size: var(--step-4); font-weight: 350; margin-bottom: var(--space-m); }
+.page-hero h1 { font-size: var(--step-4); font-weight: 600; margin-bottom: var(--space-m); }
 .page-hero h1 em { font-style: italic; color: var(--em); }
 
 /* --- About --- */
@@ -623,7 +603,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   transition: transform 0.25s;
 }
 .case-index a:hover { transform: translateY(-3px); }
-.case-index strong { font-family: var(--font-display); font-weight: 400; font-size: var(--step-1); line-height: 1.2; }
+.case-index strong { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); line-height: 1.2; }
 .case-index a > span { color: var(--muted); font-size: 0.9rem; }
 @media (min-width: 48rem) { .case-index { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 64rem) { .case-index { grid-template-columns: repeat(4, 1fr); } }
@@ -653,7 +633,7 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
 .results strong {
   font-family: var(--font-display);
   font-size: var(--step-2);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1;
   color: var(--brick);
   font-variant-numeric: tabular-nums;
