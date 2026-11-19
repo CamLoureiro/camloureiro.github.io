@@ -11,6 +11,7 @@
    6. Páginas internas (About, Casos, Contacto)
    7. Footer
    8. Animaciones
+   9. Backlog (caso 04, Documentación y tickets)
 
    Enfoque "mobile first": los estilos base son para celular.
    Las reglas @media (min-width: …) agregan cambios para pantallas
@@ -843,3 +844,57 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
 .timeline--short .job__role { margin: 0; }
 .timeline--short .job__company { margin: 0; color: var(--muted); font-weight: 400; }
 @media (min-width: 48rem) { .timeline--short .job__date { grid-row: span 2; } }
+
+
+/* ---------------------------------------------------------
+   9. BACKLOG (caso 04, Documentación y tickets)
+   Copia del tablero de Jira: sprints, historias desplegables
+   (<details>, funciona sin JavaScript) y Definición de Hecho.
+   --------------------------------------------------------- */
+.backlog { display: grid; gap: 0.75rem; }
+.bl-meta { color: var(--muted); font-size: 0.9rem; max-width: 62ch; }
+
+/* Lista de historias: filas simples o desplegables */
+.bl-list { display: grid; gap: 0.5rem; padding: 0; margin: 0.5rem 0 0; list-style: none; }
+.bl-item, .bl-row { border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); }
+
+/* Fila: clave, título y etiquetas. En celular van una debajo de la otra; desde tablet, en una línea */
+.bl-row, .bl-item > summary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem 0.75rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+}
+.bl-item > summary { cursor: pointer; list-style: none; }
+.bl-item > summary::-webkit-details-marker { display: none; }
+.bl-item > summary:focus-visible { outline: 2px solid var(--focus, var(--accent)); outline-offset: 2px; }
+.bl-item > summary .bl-title::after { content: " +"; color: var(--muted); }
+.bl-item[open] > summary .bl-title::after { content: " −"; }
+.bl-key { font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bl-title { font-weight: 500; }
+.bl-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+@media (min-width: 48rem) {
+  .bl-row, .bl-item > summary { grid-template-columns: 5.5rem 1fr auto; }
+  .bl-tags { justify-content: flex-end; }
+}
+
+/* Estado y prioridad */
+.bl-st { font: 600 0.72rem/1 var(--font-body); padding: 0.3rem 0.5rem; border-radius: var(--radius); white-space: nowrap; }
+.bl-st--done { background: var(--accent); color: var(--on-accent); }
+.bl-st--doing { border: 1px solid var(--brick); color: var(--brick); }
+.bl-st--todo { background: var(--surface); color: var(--muted); }
+.bl-pr { font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+
+/* Detalle de la historia */
+.bl-body { display: grid; gap: 0.5rem; padding: 0 1rem 1rem; max-width: 70ch; }
+@media (min-width: 48rem) { .bl-body { padding-left: 7.25rem; } }
+.bl-body ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.3rem; }
+.bl-small { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* Grupos desplegables: Backlog, cada sprint y Definición de Hecho */
+.bl-group > summary, .bl-dod > summary { grid-template-columns: 1fr; padding: 1rem; }
+.bl-group > summary .bl-title, .bl-dod > summary .bl-title { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); }
+.bl-group > .bl-body, .bl-dod > .bl-body { padding: 0 0.75rem 0.75rem; max-width: none; }
+@media (min-width: 48rem) { .bl-group > .bl-body, .bl-dod > .bl-body { padding: 0 1rem 1rem; } }
+.bl-group .bl-list { margin: 0; }
