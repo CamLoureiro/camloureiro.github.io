@@ -25,6 +25,13 @@ function setLanguage(lang) {
   document.querySelectorAll('[data-aria-en]').forEach((el) => {
     el.setAttribute('aria-label', lang === 'es' ? el.dataset.ariaEs : el.dataset.ariaEn);
   });
+  document.querySelectorAll('[data-alt-en]').forEach((el) => {
+    el.setAttribute('alt', lang === 'es' ? el.dataset.altEs : el.dataset.altEn);
+  });
+  // Títulos de iframes (el <html> usa data-title-* para la pestaña, por eso se excluye)
+  document.querySelectorAll('iframe[data-title-en]').forEach((el) => {
+    el.setAttribute('title', lang === 'es' ? el.dataset.titleEs : el.dataset.titleEn);
+  });
 
   // Título de la pestaña del navegador
   const title = lang === 'es' ? root.dataset.titleEs : root.dataset.titleEn;
@@ -166,3 +173,21 @@ if (form) {
 document.querySelectorAll('[data-year]').forEach((el) => {
   el.textContent = new Date().getFullYear();
 });
+
+/* ---------- Casos: juego in-app en vivo (caso 01) ----------
+   Los botones recargan el juego como cliente regular o VIP
+   (el juego lee ?segmento= de la URL) o lo reinician. */
+const gameFrame = document.getElementById('gameFrame');
+if (gameFrame) {
+  const gameButtons = document.querySelectorAll('[data-segment]');
+  let segment = 'regular';
+  gameButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.segment !== 'replay') segment = btn.dataset.segment;
+      gameFrame.src = 'ejemplos/cyber-globo.html?segmento=' + segment + '&t=' + Date.now();
+      gameButtons.forEach((b) => {
+        if (b.dataset.segment !== 'replay') b.classList.toggle('is-active', b.dataset.segment === segment);
+      });
+    });
+  });
+}
