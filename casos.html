@@ -39,8 +39,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Instrument+Sans:wght@400..600&display=swap">
 
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261119c">
-  <script src="assets/js/main.js?v=20261119c" defer></script>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261123a">
+  <script src="assets/js/main.js?v=20261123a" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main"><span data-lang="en">Skip to content</span><span data-lang="es">Ir al contenido</span></a>
@@ -140,6 +140,60 @@
             <div class="case__block">
               <h3 data-lang="en">Results (approximate)</h3><h3 data-lang="es">Resultados (aproximados)</h3>
               <ul class="results"><li data-lang="en"><strong>~90%</strong> of students who started a course finished it with the progress journeys.</li><li data-lang="es"><strong>~90%</strong> de quienes empezaban un curso lo terminaban con los journeys de progreso.</li><li data-lang="en"><strong>+20%</strong> more people bought another course after the welcome journey.</li><li data-lang="es"><strong>+20%</strong> de personas compraron otro curso después del journey de bienvenida.</li><li data-lang="en"><strong>+15%</strong> open rate after testing subject lines and send times.</li><li data-lang="es"><strong>+15%</strong> en la tasa de apertura al testear asuntos y horarios de envío.</li><li data-lang="en"><strong>−30%</strong> emails landing in spam after moving from image-only emails to text with separate images.</li><li data-lang="es"><strong>−30%</strong> de emails en spam al pasar de emails hechos con una sola imagen a texto con imágenes sueltas.</li></ul>
+            </div>
+          </div>
+
+          <!-- Más ejemplos: piezas hechas a mano para Braze y email.
+               Los emails van como captura (con datos de ejemplo); el juego va en vivo dentro de un iframe. -->
+          <div class="examples reveal">
+            <div class="case__block">
+              <h3 data-lang="en">More examples: Braze and email</h3><h3 data-lang="es">Más ejemplos: Braze y email</h3>
+              <p data-lang="en">Pieces I built by hand in HTML, CSS, JavaScript and Liquid. The emails are shown with sample data; the game is live, so you can play it.</p><p data-lang="es">Piezas que armé a mano en HTML, CSS, JavaScript y Liquid. Los emails se ven con datos de ejemplo; el juego está en vivo, así que podés jugarlo.</p>
+            </div>
+
+            <div class="examples__grid">
+
+              <!-- Ejemplo 1: email personalizado con Liquid -->
+              <figure class="example">
+                <a class="example__frame" href="assets/img/ejemplos/email-braze-liquid.jpg" target="_blank" rel="noopener">
+                  <img src="assets/img/ejemplos/email-braze-liquid.jpg" width="800" height="1697" loading="lazy" alt="" data-alt-en="Personalised email: hero, title and products for a customer whose favourite category is Technology, with an extra line for VIP customers" data-alt-es="Email personalizado: hero, título y productos para una persona cuya categoría favorita es Tecnología, con una línea extra para clientes VIP">
+                </a>
+                <figcaption>
+                  <strong data-lang="en">Personalised email with Liquid</strong><strong data-lang="es">Email personalizado con Liquid</strong>
+                  <p data-lang="en">The hero, title and link change with each person's favourite category, and VIP customers see an extra line. Ready for dark mode and Outlook.</p><p data-lang="es">El hero, el título y el link cambian según la categoría favorita de cada persona, y los clientes VIP ven una línea extra. Preparado para modo oscuro y Outlook.</p>
+                  <ul class="tags"><li>Braze</li><li>Liquid</li><li>HTML</li><li>Dark mode</li></ul>
+                </figcaption>
+              </figure>
+
+              <!-- Ejemplo 2: juego in-app en vivo -->
+              <figure class="example">
+                <div class="example__frame example__frame--live">
+                  <iframe id="gameFrame" src="ejemplos/cyber-globo.html?segmento=regular" loading="lazy" data-title-en="In-app game: pop the balloon" data-title-es="Juego in-app: explota el globo" title="Juego in-app: explota el globo"></iframe>
+                </div>
+                <div class="example__controls" role="group" data-aria-en="Try the game" data-aria-es="Probar el juego">
+                  <button type="button" class="chip-btn is-active" data-segment="regular"><span data-lang="en">Regular customer</span><span data-lang="es">Cliente regular</span></button>
+                  <button type="button" class="chip-btn" data-segment="vip"><span data-lang="en">VIP customer</span><span data-lang="es">Cliente VIP</span></button>
+                  <button type="button" class="chip-btn" data-segment="replay"><span data-lang="en">Play again</span><span data-lang="es">Jugar de nuevo</span></button>
+                </div>
+                <figcaption>
+                  <strong data-lang="en">In-app game: pop the balloon</strong><strong data-lang="es">Juego in-app: explota el globo</strong>
+                  <p data-lang="en">An in-app message for a Cyber sale: tap the balloon and win a random prize. VIP customers always win. The result is saved in Braze as a custom event.</p><p data-lang="es">Un mensaje in-app para el Cyber: tocás el globo y ganás un premio al azar. Los clientes VIP siempre ganan. El resultado se guarda en Braze como evento.</p>
+                  <ul class="tags"><li>Braze in-app</li><li>JavaScript</li><li>Liquid</li></ul>
+                </figcaption>
+              </figure>
+
+              <!-- Ejemplo 3: email responsive compatible con Outlook -->
+              <figure class="example">
+                <a class="example__frame" href="assets/img/ejemplos/email-responsive.jpg" target="_blank" rel="noopener">
+                  <img src="assets/img/ejemplos/email-responsive.jpg" width="800" height="1742" loading="lazy" alt="" data-alt-en="Responsive email template: header with button, hero image, two columns, background image section and footer" data-alt-es="Plantilla de email responsive: encabezado con botón, imagen principal, dos columnas, bloque con imagen de fondo y footer">
+                </a>
+                <figcaption>
+                  <strong data-lang="en">Responsive email, Outlook-ready</strong><strong data-lang="es">Email responsive, compatible con Outlook</strong>
+                  <p data-lang="en">A template built from a design: columns that stack on mobile, a bulletproof button and a background image that also works in Outlook (VML).</p><p data-lang="es">Una plantilla maquetada a partir de un diseño: columnas que se apilan en celular, botón a prueba de Outlook e imagen de fondo que también funciona en Outlook (VML).</p>
+                  <ul class="tags"><li>HTML</li><li>CSS</li><li>VML</li><li>Outlook</li></ul>
+                </figcaption>
+              </figure>
+
             </div>
           </div>
         </article>

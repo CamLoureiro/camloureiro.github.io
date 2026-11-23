@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Cyber - Explota el globo - CL</title>
+
+<style>
+
+/* VARIABLES DE DISEÑO */
+
+:root {
+  --color-overlay: rgba(0, 0, 0, 0.65);   /* Fondo oscuro pantalla */
+  --color-card: #ffffff;                  /* Fondo blanco tarjeta */
+  --color-primario: #006DFF;              /* Color azul botones y títulos */
+  --color-texto: #1f1f1f;                 /* Color gris escuro texto principal */
+  --color-texto-suave: #6b6b6b;           /* Color gris claro texto secundario */
+  --color-globo: #dc0b61;                 /* Color rosa escuro globo */
+  --color-globo-brillo: #fa599b;          /* Color rosa claro brillo del globo */
+  --radio: 16px;                          /* Redondeo de tarjeta y botones */
+}
+
+/* BASE Y CONTENEDOR (mobile 360 a 414 px) */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }                      /* Reseteo básico */
+html, body { height: 100%; font-family: Montserrat, ui-sans-serif, system-ui, sans-serif; background: transparent; }
+
+.overlay {                                                                
+  position: fixed; inset: 0;
+  background: var(--color-overlay);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.overlay.oculto { display: none; }                                         /* Se usa al tocar la X */
+
+.card {                                                                   
+  position: relative;
+  width: 100%; max-width: 382px;                                           /* 414 px - 32 px de márgenes */
+  background: var(--color-card); color: var(--color-texto);
+  border-radius: var(--radio); border: 2px solid var(--color-globo);
+  padding: 40px 20px 24px;
+  text-align: center;
+  overflow: hidden;
+  animation: entrar 0.35s ease-out;                                        /* Animación de entrada */
+}
+@keyframes entrar { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* BOTON DE CERRAR X */
+.btn-cerrar {
+  position: absolute; top: 10px; right: 10px;
+  width: 36px; height: 36px;
+  border: none; border-radius: 50%;
+  background: #f0f0f0; color: var(--color-globo);
+  font-size: 18px; line-height: 36px; cursor: pointer;
+  z-index: 10;
+}
+
+/* ESTILO DE PANTALLA DEL JUEGO  */
+.titulo { font-size: 22px; color: var(--color-primario); margin-bottom: 6px; }
+.subtitulo { font-size: 14px; color: var(--color-texto-suave); margin-bottom: 16px; }
+
+.zona-globo { position: relative; height: 230px; display: flex; align-items: center; justify-content: center; }
+
+.globo {                                                                   /* Cuerpo del globo (es un botón para que sea accesible) */
+  position: relative;
+  width: 130px; height: 160px;
+  border: none; cursor: pointer;
+  border-radius: 50% 50% 48% 48% / 55% 55% 45% 45%;
+  background: radial-gradient(circle at 32% 28%, var(--color-globo-brillo) 0%, var(--color-globo) 45%);
+  animation: flotar 2.4s ease-in-out infinite;                             /* Flota mientras espera el toque */
+  -webkit-tap-highlight-color: transparent;
+}
+.globo::before {                                                           /* Nudito del globo */
+  content: ""; position: absolute; bottom: -8px; left: 50%;
+  transform: translateX(-50%);
+  border-left: 8px solid transparent; border-right: 8px solid transparent;
+  border-bottom: 10px solid var(--color-globo);
+}
+.globo::after {                                                            /* Hilo del globo */
+  content: ""; position: absolute; top: 100%; left: 50%;
+  width: 2px; height: 50px; margin-top: 2px;
+  background: #b5b5b5;
+}
+@keyframes flotar { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-12px) rotate(2deg); } }
+
+.globo.reventando { animation: reventar 0.4s ease-out forwards; }        /* Se infla y desaparece al tocarlo */
+@keyframes reventar { 0% { transform: scale(1); opacity: 1; } 20% { transform: scale(1.25); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+
+.particula {                                                               /* Pedacitos que salen al reventar */
+  position: absolute; top: 50%; left: 50%;
+  width: 10px; height: 10px; border-radius: 2px;
+  background: var(--color-globo);
+  animation: explotar 0.6s ease-out forwards;
+}
+@keyframes explotar {
+  from { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
+  to   { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
+}
+
+/* PANTALLA DE RESULTADO */
+.pantalla { display: none; }                                               /* Las pantallas arrancan ocultas */
+.pantalla.activa { display: block; animation: entrar 0.35s ease-out; }    /* Solo se ve la activa */
+
+.icono-resultado { font-size: 56px; margin-bottom: 8px; }
+.texto-resultado { font-size: 15px; color: var(--color-texto-suave); margin: 8px 0 16px; }
+
+.cupon {                                                                   /* Caja con el código del cupón */
+  display: inline-block;
+  border: 2px dashed var(--color-primario);
+  border-radius: 10px;
+  padding: 10px 18px; margin-bottom: 20px;
+  font-size: 20px; font-weight: bold; letter-spacing: 2px;
+  color: var(--color-primario);
+}
+.cupon.oculto, .btn.oculto { display: none; }
+
+.btn {                                                                     /* Botones de acción */
+  display: block; width: 100%;
+  padding: 14px; margin-top: 10px;
+  border-radius: var(--radio); border: none;
+  font-size: 16px; font-weight: bold; cursor: pointer;
+}
+.btn-primario { background: var(--color-primario); color: #fff; }
+.btn-secundario { background: transparent; color: var(--color-texto-suave); }
+</style>
+</head>
+
+<body>
+<!-- ESTRUCTURA HTML  -->
+<div class="overlay" id="overlay">
+  <div class="card" role="dialog" aria-modal="true" aria-labelledby="tituloJuego">
+
+    <!-- Botón para cerrar el mensaje en cualquier momento -->
+    <button class="btn-cerrar" id="btnCerrar" aria-label="Cerrar">✕</button>
+
+    <!-- Pantalla 1: juego -->
+    <div class="pantalla activa" id="pantallaJuego">
+      <h1 class="titulo" id="tituloJuego">Explota el globo!</h1>
+      <p class="subtitulo">Tócalo y descubre tu premio del Cyber</p>
+      <div class="zona-globo" id="zonaGlobo">
+        <button class="globo" id="globo" aria-label="Reventar el globo"></button>
+      </div>
+    </div>
+
+    <!-- Pantalla 2: resultado (se completa por JavaScript) -->
+    <div class="pantalla" id="pantallaResultado">
+      <div class="icono-resultado" id="iconoResultado"></div>
+      <h2 class="titulo" id="tituloResultado"></h2>
+      <p class="texto-resultado" id="textoResultado"></p>
+      <div class="cupon" id="cupon"></div>
+      <button class="btn btn-primario" id="btnCta"></button>
+      <button class="btn btn-secundario" id="btnCerrarResultado">Cerrar</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* CONFIGURACIÓN DE PREMIOS */
+var PREMIOS = [
+  { id: "tecno_10off",   probabilidad: 20, excluirVip: false, icono: "💻", titulo: "¡10% OFF en Tecnología!", texto: "Usa este cupón en tu próxima compra de Tecnología.", cupon: "CYBERTECH10", cta: "Ir a Tecnología",  deeplink: "tienda://categoria/tecnologia" },
+  { id: "despacho_gratis", probabilidad: 30, excluirVip: false, icono: "🚚", titulo: "¡Despacho gratis!", texto: "Tu próximo envío corre por nuestra cuenta.", cupon: "CYBERENVIO", cta: "Empezar a comprar", deeplink: "tienda://categoria/cyber" },
+  { id: "descuento_5000", probabilidad: 10, excluirVip: false, icono: "🎁", titulo: "¡$5.000 de descuento!", texto: "Aplícalo en tu próxima compra del Cyber.", cupon: "CYBER5000", cta: "Usar mi descuento", deeplink: "tienda://categoria/cyber" },
+  { id: "sigue_participando", probabilidad: 40, excluirVip: true, icono: "🎈", titulo: "¡Sigue participando!", texto: "Esta vez no hubo premio, pero el Cyber sigue.", cupon: null, cta: null, deeplink: null }
+];
+
+/* SEGMENTO DEL USUARIO (Liquid + valor de prueba)
+   ----------------------------------------------------------
+   En Braze, Liquid reemplaza la línea de abajo por el segmento real
+   ("vip" o "regular"). En el navegador queda el texto sin procesar,
+   entonces se usa el valor de prueba (o ?segmento=vip en la URL).
+   ========================================================== */
+var SEGMENTO_LIQUID = "{{custom_attribute.${segmento_cliente} | default: 'regular'}}";
+var SEGMENTO_PRUEBA = "vip";                                           
+
+// Devuelve el segmento final: el de Braze si Liquid se procesó, si no el de prueba
+function obtenerSegmento() {
+  var marcaLiquid = "{" + "{";                                             // Se arma en dos partes para que Braze no lo tome como Liquid
+  var liquidSinProcesar = SEGMENTO_LIQUID.indexOf(marcaLiquid) !== -1;
+  if (!liquidSinProcesar) return SEGMENTO_LIQUID.toLowerCase().trim();     // Estamos dentro de Braze
+  var parametroUrl = new URLSearchParams(window.location.search).get("segmento");
+  return (parametroUrl || SEGMENTO_PRUEBA).toLowerCase();                  // Estamos en el navegador
+}
+
+var SEGMENTO = obtenerSegmento();
+var ES_VIP = SEGMENTO === "vip";
+
+/* ==========================================================
+   SORTEO DEL PREMIO
+   ========================================================== */
+// Arma la lista de premios posibles según el segmento (VIP sin "Sigue participando")
+function premiosDisponibles(esVip) {
+  return PREMIOS.filter(function (premio) { return !(esVip && premio.excluirVip); });
+}
+
+// Elige un premio al azar respetando los pesos; para VIP, el 40% excluido se reparte proporcionalmente
+function sortearPremio(esVip) {
+  var lista = premiosDisponibles(esVip);
+  var total = lista.reduce(function (suma, premio) { return suma + premio.probabilidad; }, 0);  // 100 regulares, 60 VIP
+  var azar = Math.random() * total;                                        // Número entre 0 y el total
+  for (var i = 0; i < lista.length; i++) {
+    if (azar < lista[i].probabilidad) return lista[i];                     // Cae dentro del tramo de este premio
+    azar -= lista[i].probabilidad;                                         // Si no, pasa al siguiente tramo
+  }
+  return lista[lista.length - 1];                                          // Respaldo por redondeos
+}
+
+/* ==========================================================
+   PUENTE CON BRAZE (real dentro de la app, simulado en el navegador)
+   ========================================================== */
+var Braze = {
+  // Indica si el bridge de Braze existe (solo dentro del in-app message)
+  disponible: function () { return typeof window.brazeBridge !== "undefined"; },
+
+  // Registra un clic en Braze con un ID de botón personalizado
+  registrarClic: function (idBoton) {
+    if (this.disponible()) { brazeBridge.logClick(idBoton); }
+    else { console.log("[Braze simulado] logClick:", idBoton); }
+  },
+
+  // Guarda el resultado como evento custom con propiedades y fuerza el envío inmediato
+  guardarResultado: function (premio) {
+    var propiedades = { resultado: premio.id, cupon: premio.cupon || "", segmento: SEGMENTO, juego: "globo" };
+    if (this.disponible()) {
+      brazeBridge.logCustomEvent("cyber_juego_jugado", propiedades);
+      brazeBridge.requestImmediateDataFlush();
+    } else { console.log("[Braze simulado] logCustomEvent: cyber_juego_jugado", propiedades); }
+  },
+
+  // Cierra el in-app message (en el navegador solo oculta el overlay)
+  cerrar: function () {
+    if (this.disponible()) { brazeBridge.closeMessage(); }
+    else { console.log("[Braze simulado] closeMessage"); document.getElementById("overlay").classList.add("oculto"); }
+  },
+
+  // Abre el deeplink de la categoría (en el navegador solo lo muestra en consola)
+  abrirDeeplink: function (url) {
+    if (this.disponible()) { window.location.href = url; }
+    else { console.log("[Braze simulado] abrir deeplink:", url); }
+  }
+};
+
+/* ==========================================================
+   ANIMACIÓN DEL GLOBO
+   ========================================================== */
+// Crea pedacitos que salen disparados en direcciones al azar
+function crearParticulas(contenedor, cantidad) {
+  for (var i = 0; i < cantidad; i++) {
+    var p = document.createElement("span");
+    var angulo = (Math.PI * 2 * i) / cantidad;                             // Reparte las partículas en círculo
+    var distancia = 80 + Math.random() * 50;
+    p.className = "particula";
+    p.style.setProperty("--dx", Math.cos(angulo) * distancia + "px");
+    p.style.setProperty("--dy", Math.sin(angulo) * distancia + "px");
+    p.style.setProperty("--rot", Math.random() * 360 + "deg");
+    contenedor.appendChild(p);
+  }
+}
+
+/* ==========================================================
+  MOSTRAR RESULTADO EN PANTALLA
+   ========================================================== */
+// Completa la pantalla de resultado con los datos del premio
+function mostrarResultado(premio) {
+  document.getElementById("iconoResultado").textContent = premio.icono;
+  document.getElementById("tituloResultado").textContent = premio.titulo;
+  document.getElementById("textoResultado").textContent = premio.texto;
+
+  var cupon = document.getElementById("cupon");
+  var btnCta = document.getElementById("btnCta");
+  if (premio.cupon) {                                                      // Ganó: muestra cupón y botón con deeplink
+    cupon.textContent = premio.cupon;
+    btnCta.textContent = premio.cta;
+    btnCta.setAttribute("data-deeplink", premio.deeplink);
+  } else {                                                                 // No ganó: oculta cupón y botón
+    cupon.classList.add("oculto");
+    btnCta.classList.add("oculto");
+  }
+
+  document.getElementById("pantallaJuego").classList.remove("activa");
+  document.getElementById("pantallaResultado").classList.add("activa");
+}
+
+/* ==========================================================
+   FLUJO PRINCIPAL: tocar el globo
+   ========================================================== */
+var yaJugo = false;                                                        // Evita que se juegue dos veces
+
+// Al tocar el globo: registra clic, sortea, guarda, anima y muestra el resultado
+function jugar() {
+  if (yaJugo) return;
+  yaJugo = true;
+
+  Braze.registrarClic("globo");                                            // 1. Registra el clic del juego
+  var premio = sortearPremio(ES_VIP);                                      // 2. Sortea el premio según segmento
+  Braze.guardarResultado(premio);                                          // 3. Guarda el resultado en Braze
+
+  var globo = document.getElementById("globo");                            // 4. Anima la explosión
+  globo.classList.add("reventando");
+  crearParticulas(document.getElementById("zonaGlobo"), 14);
+
+  setTimeout(function () { mostrarResultado(premio); }, 650);              // 5. Muestra el resultado al terminar la animación
+}
+
+/* ==========================================================
+   EVENTOS DE LOS BOTONES
+   ========================================================== */
+document.getElementById("globo").addEventListener("click", jugar);         // Tocar el globo inicia el juego
+
+document.getElementById("btnCerrar").addEventListener("click", function () {          // ✕ cierra en cualquier momento
+  Braze.cerrar();
+});
+
+document.getElementById("btnCerrarResultado").addEventListener("click", function () { // "Cerrar" en la pantalla de resultado
+  Braze.cerrar();
+});
+
+document.getElementById("btnCta").addEventListener("click", function () {             // Botón del premio: registra clic y abre el deeplink
+  Braze.registrarClic("cta_premio");
+  Braze.abrirDeeplink(this.getAttribute("data-deeplink"));
+});
+</script>
+</body>
+</html>
