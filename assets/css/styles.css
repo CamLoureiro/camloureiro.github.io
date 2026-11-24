@@ -655,6 +655,10 @@ html[lang="en"] [data-lang="es"] { display: none !important; }
   color: var(--brick);
   font-variant-numeric: tabular-nums;
 }
+/* Resultados sin números: una palabra destacada (Más, Mejor, Menos) en lugar de la cifra */
+.case__block .results--words { margin-top: 0.75rem; }
+.results--words li { grid-template-columns: 5.5rem 1fr; }
+.results--words strong { font-size: var(--step-1); }
 @media (min-width: 64rem) { .case__body { grid-template-columns: 1fr 1fr; column-gap: 4rem; } }
 
 .badge {
